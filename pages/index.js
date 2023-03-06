@@ -1,9 +1,10 @@
 import Navbar from "../components/Navbar";
 import commerce from "../lib/commerce";
 import ProductList from "../components/ProductList";
+import Head from "next/head";
+import ShopByCart from "../components/ShopByCart";
 
 export async function getStaticProps() {
-  const merchant = await commerce.merchants.about();
   const { data: categories } = await commerce.categories.list();
   const { data: products } = await commerce.products.list();
     console.log(categories);
@@ -11,7 +12,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      merchant,
       categories,
       products,
     },
@@ -19,11 +19,17 @@ export async function getStaticProps() {
 
 }
 
-export default function IndexPage({ merchant, categories, products }) {
+export default function IndexPage({ categories, products }) {
   return (
     <>
-     <Navbar/>
-     <ProductList products={products} />
+      <Head>
+        <title> FlairStyle | Home</title>
+        <meta name="keywords" content="FlairStyle" />
+      </Head>
+
+      <Navbar />
+      <ShopByCart categories={categories} />
+      <ProductList products={products} />
     </>
   );
 }
