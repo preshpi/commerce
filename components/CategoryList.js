@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import Category from "./category";
 
 export default function CategoryList({ categories }) {
-    if (!categories) return null;
+  if (!categories) return null;
   return (
     <div className="mt-[40px] w-[95%] mx-auto">
       <h2 className="text-center text-3xl font-bold mb-[3%]">
@@ -26,7 +27,7 @@ export default function CategoryList({ categories }) {
                       <img
                         src={assets.url}
                         alt={category.slug}
-                        className="w-[70px] h-[70px] object-cover"
+                        className="object-cover w-[70px] h-[70px]"
                       />
                     </div>
                   ))}
@@ -39,7 +40,6 @@ export default function CategoryList({ categories }) {
           </li>
         ))}
       </ul>
-
     </div>
   );
 }

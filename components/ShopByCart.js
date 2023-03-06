@@ -1,16 +1,16 @@
 import Category from "./category";
+import Image from "next/image";
 import Link from "next/link";
 
 const ShopByCart = ({ categories }) => {
-
-  const visibleCategories = categories.slice(0, 5);
+  const visibleCategories = categories.slice(0, 4);
   return (
     <div className="mt-[40px] w-[95%] mx-auto">
       <h2 className="text-center text-3xl font-bold mb-[3%]">
         Shop By Categories
       </h2>
 
-      <ul className="grid-cols-2 grid lg:grid-cols-5 md:grid-cols-4 gap-[50px] items-center justify-center">
+      <ul className="grid-cols-2 grid lg:grid-cols-4 w-[80%] mx-auto gap-[20px] mt-[5%]">
         {visibleCategories.map((category) => (
           <li key={category.slug}>
             <Link
@@ -27,7 +27,7 @@ const ShopByCart = ({ categories }) => {
                       <img
                         src={assets.url}
                         alt={category.slug}
-                        className="w-[70px] h-[70px] object-cover"
+                        className="object-cover lg:w-[70px] lg:h-[70px] w-[50px] h-[50px]"
                       />
                     </div>
                   ))}
@@ -47,5 +47,5 @@ const ShopByCart = ({ categories }) => {
     </div>
   );
 };
- 
+
 export default ShopByCart;

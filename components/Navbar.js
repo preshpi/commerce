@@ -35,7 +35,7 @@ function Navbar() {
         return () => {
         clearInterval(intervalId);
         };
-    }, []);
+    });
 
     useEffect(() => {
         const handler = (e) => {
@@ -118,7 +118,7 @@ function Navbar() {
           </ul>
         </div>
 
-         <form className="items-center justify-center relative w-full mt-[3%]">
+         <form className="items-center justify-center relative w-full mt-[5%]">
             <input
               className="border border-[#E4E5E4] text-[#757575] rounded py-1 px-4 pr-12 outline-none w-full bg-none"
               type="text"
