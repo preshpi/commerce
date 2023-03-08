@@ -17,7 +17,7 @@ export default function CategoryList({ categories }) {
               href={`/categories/${category.slug}`}
               className="justify-center items-center flex"
             >
-              <div className="w-[250px] border grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
+              <div className="w-[250px] h-[250px] grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
                 <div>
                   {category.assets.map((assets) => (
                     <div
@@ -27,8 +27,8 @@ export default function CategoryList({ categories }) {
                       <Image
                         src={`${assets.url}`}
                         alt={category.slug}
-                        width={70}
-                        height={70}
+                        width={300}
+                        height={300}
                         loading="lazy"
                       />
                     </div>

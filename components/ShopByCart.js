@@ -6,18 +6,18 @@ const ShopByCart = ({ categories }) => {
   const visibleCategories = categories.slice(0, 4);
   return (
     <div className="mt-[40px] w-[95%] mx-auto">
-      <h2 className="text-center text-3xl font-bold mb-[3%]">
+      <h2 className="text-center text-3xl font-[600] mb-[3%]">
         Shop By Categories
       </h2>
 
-      <ul className="grid-cols-2 grid lg:grid-cols-4 w-[80%] mx-auto gap-[20px] mt-[5%]">
+      <ul className="grid-cols-2 grid lg:grid-cols-4 w-[80%] mx-auto gap-[20px] mt-[5%] mb-[3%]">
         {visibleCategories.map((category) => (
           <li key={category.slug}>
             <Link
               href={`/categories/${category.slug}`}
               className="justify-center items-center flex"
             >
-              <div className="w-[250px] border grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
+              <div className="w-[250px] lg:h-[300px] grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
                 <div>
                   {category.assets.map((assets) => (
                     <div
@@ -27,12 +27,14 @@ const ShopByCart = ({ categories }) => {
                       <Image
                         src={assets.url}
                         alt={category.slug}
-                        className="object-cover lg:w-[70px] lg:h-[70px] w-[50px] h-[50px]"
+                        width={300}
+                        height={300}
+                        className="object-cover lg:w-[200px] lg:h-[300px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] transition-all duration-300 hover:scale-110"
                       />
                     </div>
                   ))}
                 </div>
-                <div className="mt-3">
+                <div className="mt-3 uppercase">
                   <Category {...category} />
                 </div>
               </div>

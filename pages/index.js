@@ -5,6 +5,8 @@ import Head from "next/head";
 import ShopByCart from "../components/ShopByCart";
 import Banner1 from "../components/Banner1";
 import Banner2 from "../components/Banner2";
+import ShopByBrand from "../components/Banner3";
+import Footer from "../components/Footer";
 
 export async function getStaticProps() {
   const { data: categories } = await commerce.categories.list();
@@ -23,7 +25,7 @@ export async function getStaticProps() {
 
 export default function IndexPage({ categories, products }) {
   return (
-    <>
+    <div className="brandColor">
       <Head>
         <title> FlairStyle | Home</title>
         <meta name="keywords" content="FlairStyle" />
@@ -34,7 +36,9 @@ export default function IndexPage({ categories, products }) {
       <Banner1/>
       <ProductList products={products} />
       <Banner2/>
-    </>
+      <ShopByBrand/>
+      <Footer/>
+    </div>
   );
 }
 
