@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Category from "./category";
+import Category from "./Category";
 
 export default function CategoryList({ categories }) {
   if (!categories) return null;

@@ -1,4 +1,4 @@
-import Category from "./category";
+import Category from "./Category";
 import Image from "next/image";
 import Link from "next/link";
 
