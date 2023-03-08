@@ -24,7 +24,7 @@ const ShopByCart = ({ categories }) => {
                       key={assets.id}
                       className="w-full h-full flex items-center justify-center mt-4"
                     >
-                      <img
+                      <Image
                         src={assets.url}
                         alt={category.slug}
                         className="object-cover lg:w-[70px] lg:h-[70px] w-[50px] h-[50px]"

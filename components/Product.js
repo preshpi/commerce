@@ -4,7 +4,7 @@ import FavouriteButton from "./FavouriteButton";
 export default function Product({ name, price, permalink }) {
   return (
     <>
-      <div className="flex justify-between mt-3 w-[250px]">
+      <div className="flex items-between justify-between mt-3 w-full">
         <Link
           href={`/products/${permalink}`}
           className="hover:underline hover:font-bold cursor-pointer"

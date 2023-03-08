@@ -24,10 +24,12 @@ export default function CategoryList({ categories }) {
                       key={assets.id}
                       className="w-full h-full flex items-center justify-center mt-4"
                     >
-                      <img
-                        src={assets.url}
+                      <Image
+                        src={`${assets.url}`}
                         alt={category.slug}
-                        className="object-cover w-[70px] h-[70px]"
+                        width={70}
+                        height={70}
+                        loading="lazy"
                       />
                     </div>
                   ))}
