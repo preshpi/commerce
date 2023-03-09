@@ -37,8 +37,8 @@ export default function ProductPage({ product }) {
   return (
     <>
       <Head>
-        <title> FashionFlaire | Products</title>
-        <meta name="keywords" content="FashionFlaire" />
+        <title> FlairStyle | Products</title>
+        <meta name="keywords" content="FlairStyle" />
       </Head>
       <div className="w-[80%] mx-auto mb-3 p-3">
         <span>

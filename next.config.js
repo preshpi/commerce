@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["cdn.chec.io"],
+    domains: ["cdn.chec.io", "res.cloudinary.com"],
   },
 };

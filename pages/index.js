@@ -11,8 +11,7 @@ import Footer from "../components/Footer";
 export async function getStaticProps() {
   const { data: categories } = await commerce.categories.list();
   const { data: products } = await commerce.products.list();
-    console.log(categories);
-    console.log(products);
+
 
   return {
     props: {

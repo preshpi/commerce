@@ -1,47 +1,51 @@
 import Link from "next/link";
 import Image from "next/image";
 import Category from "./Category";
+import Product from "./Product";
+import Head from "next/head";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-export default function CategoryList({ categories }) {
+export default function CategoryList({ categories, products }) {
   if (!categories) return null;
+  console.log(categories);
   return (
-    <div className="mt-[40px] w-[95%] mx-auto">
-      <h2 className="text-center text-3xl font-bold mb-[3%]">
-        Shop By Categories
-      </h2>
+    <>
+      <Head>
+        <title> FlairStyle | categories</title>
+        <meta name="keywords" content="FlairStyle" />
+      </Head>
 
-      <ul className="grid-cols-2 grid lg:grid-cols-5 md:grid-cols-4 gap-[50px] items-center justify-center">
-        {categories.map((category) => (
-          <li key={category.slug}>
-            <Link
-              href={`/categories/${category.slug}`}
-              className="justify-center items-center flex"
-            >
-              <div className="w-[250px] h-[250px] grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
-                <div>
-                  {category.assets.map((assets) => (
-                    <div
-                      key={assets.id}
-                      className="w-full h-full flex items-center justify-center mt-4"
-                    >
-                      <Image
-                        src={`${assets.url}`}
-                        alt={category.slug}
-                        width={300}
-                        height={300}
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-3">
+      <div className="w-[80%] mx-auto mb-3 p-3 flex items-center gap-2 text-sm mt-5">
+        <span className="hover:underline text-gray-500">
+          <Link href="/">Home </Link>
+        </span>
+
+        <span>
+          <MdOutlineKeyboardArrowRight />
+        </span>
+
+        <span className="text-black font-bold">
+          <span>categories</span>
+        </span>
+      </div>
+
+      <div className="mt-[40px] w-[95%] mx-auto">
+        <ul className="grid-cols-2 grid lg:grid-cols-4 md:grid-cols-5 lg:gap-[30px] md:gap-[20px] gap-[10px] items-center justify-center">
+          {categories.map((category) => (
+            <li key={category.slug}>
+              <Link
+                href={`/categories/${category.slug}`}
+                className="justify-center items-center flex"
+              >
+                <div className="bg-gray-300 rounded-lg w-[160px] h-12 flex items-center justify-center">
                   <Category {...category} />
                 </div>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </>
   );
 }
