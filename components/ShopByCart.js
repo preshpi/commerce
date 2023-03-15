@@ -5,8 +5,8 @@ import Link from "next/link";
 const ShopByCart = ({ categories }) => {
   const visibleCategories = categories.slice(0, 4);
   return (
-    <div className="mt-[40px] w-[95%] mx-auto">
-      <h2 className="text-center text-3xl font-[600] mb-[3%]">
+    <div className="w-[95%] mx-auto mt-[6%]">
+      <h2 className="text-center text-3xl font-[600] pt-6">
         Shop By Categories
       </h2>
 
@@ -42,10 +42,12 @@ const ShopByCart = ({ categories }) => {
           </li>
         ))}
       </ul>
-
-      <button className="underline text-black font-bold py-2 px-4 rounded-full my-4 hover:text-gray-700">
+      <div className="flex items-center justify-center pt-6">
+      <button className="bg-[#222] text-white text-center font-bold py-2 px-4 rounded-full my-4 hover:opacity-75 animate-pulse">
         <Link href="/categories">Show All </Link>
-      </button>
+      </button>        
+      </div>
+
     </div>
   );
 };

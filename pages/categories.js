@@ -1,20 +1,29 @@
 import commerce from "../lib/commerce";
 import CategoryList from "../components/CategoryList";
+import ProductsInCategories from "../components/ProductsIncategories";
 
 export async function getStaticProps() {
+
   const { data: categories } = await commerce.categories.list();
+  const { data: products } = await commerce.products.list();
+
 
   return {
     props: {
       categories,
+      products,
     },
   };
 }
 
-export default function CategoriesPage({ categories }) {
+export default function CategoriesPage({ categories, products, onAddToCart }) {
+  console.log(products);
   return (
     <>
       <CategoryList categories={categories} />
+      <ProductsInCategories products={products} onAddToCart={onAddToCart} />
     </>
   );
 }
+
+

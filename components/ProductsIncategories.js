@@ -1,15 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import Product from "./Product";
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function ProductList({ products, onAddToCart }) {
-  const displayedProducts = products.slice(0, 12); // Display only the first 12 products
+export default function ProductsInCategories({ products, onAddToCart }) {
+  const displayedProducts = products;
   if (!products) return null;
 
   return (
-    <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%]">
-      <ul className="gap-[30px] grid lg:grid-cols-4 md:grid-cols-2">
+    <div className="lg:w-[80%] md:w-[85%] mx-auto place-items-center grid justify-center lg:mt-[5%] mt-[15%] md:mt-[10%]">
+      <ul className="gap-[50px] md:gap-[30px] grid lg:grid-cols-4 md:grid-cols-3">
         {displayedProducts.map((product) => (
           <li key={product.permalink}>
             <ProductCard product={product} onAddToCart={onAddToCart} />
@@ -30,7 +30,6 @@ function ProductCard({ product, onAddToCart }) {
   const handleMouseLeave = () => {
     setIshovered(false);
   };
-  
 
   return (
     <div
@@ -45,7 +44,7 @@ function ProductCard({ product, onAddToCart }) {
           width={300}
           height={300}
           loading="lazy"
-          className="object-cover lg:w-[300px] lg:h-[300px] w-[250px] h-[250px] relative"
+          className="object-cover lg:w-[300px] lg:h-[300px] w-[300px] h-[300px] relative"
         />
       </Link>
 

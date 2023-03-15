@@ -29,7 +29,7 @@ const Countdown = () => {
 
   return (
     <div className="flex items-center justify-center">
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center pt-4">
           <div className="grid">
             <p className="text-x font-light mx-4 uppercase">days</p>
             <p className="text-xl mx-4">{days}</p>

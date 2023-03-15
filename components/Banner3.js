@@ -9,12 +9,12 @@ const data = [
   {
     id: 2,
     img: "https://res.cloudinary.com/dpokiomqq/image/upload/v1677053347/austin-wade-d2s8NQ6WD24-unsplash_kjolg7.jpg",
-    button: "Shop The Brand",
+    button: "Shop By Trends",
   },
   {
     id: 3,
     img: "https://res.cloudinary.com/dpokiomqq/image/upload/v1677053347/austin-wade-d2s8NQ6WD24-unsplash_kjolg7.jpg",
-    button: "Shop The Brand",
+    button: "Shop By Fit",
   },
 ];
 

@@ -9,7 +9,7 @@ import { BsHeart, BsBag } from "react-icons/bs";
 import { RxPerson } from "react-icons/rx";
 import Link from "next/link";
 
-function Navbar() {
+function Navbar({ cart }) {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
 
@@ -99,7 +99,16 @@ function Navbar() {
               </li>
               <li className="cursor-pointer">
                 <Link href="/cart">
-                  <BsBag />
+                  <button className="inline-flex space-x-4 relative">
+                    <BsBag />
+                    {cart !== null ? (
+                      <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
+                        {cart.total_items}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </button>
                 </Link>
               </li>
             </ul>
@@ -127,7 +136,7 @@ function Navbar() {
             </li>
 
             <li className="cursor-pointer flex">
-              <Link href="/favourite">
+              <Link href="/wishlist">
                 <BsHeart />
               </Link>
             </li>
