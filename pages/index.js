@@ -23,7 +23,6 @@ export async function getStaticProps() {
 
 export default function IndexPage({ categories, products }) {
   const [cart, setCart] = useState({});
-
   const fetchCart = () => {
     commerce.cart
       .retrieve()
@@ -100,8 +99,8 @@ export default function IndexPage({ categories, products }) {
         onUpdateCartQty={handleUpdateCartQty}
         onEmptyCart={handleEmptyCart}
         onRemoveFromCart={handleRemoveFromCart}
+        categories={categories}
       />
-
       <ShopByCart categories={categories} />
       <Banner1 />
       <ProductList products={products} onAddToCart={handleAddToCart} />

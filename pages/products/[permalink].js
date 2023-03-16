@@ -5,6 +5,8 @@ import Image from "next/image";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineSafety } from "react-icons/ai";
 import FavouriteButton from "../../components/FavouriteButton";
+import Footer from "../../components/Footer";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 export async function getStaticProps({ params }) {
   const { permalink } = params;
@@ -37,21 +39,26 @@ export default function ProductPage({ product }) {
   return (
     <>
       <Head>
-        <title> FlairStyle | Products</title>
+        <title> FlairStyle | {product.name}</title>
         <meta name="keywords" content="FlairStyle" />
       </Head>
 
       <div className="w-[80%] mx-auto">
-        <div className="pt-6">
-        <span> 
-          <Link href="/">Home /</Link>
-        </span>
-        <span>
-          <Link href="/products"> Products /</Link>
-        </span>
-        <span className="font-[700]"> {product.name}</span>          
+        <div className="pt-6 gap-2 text-sm flex items-center">
+          <span className="hover:underline text-gray-500">
+            <Link href="/">Home </Link>
+          </span>
+          <span>
+            <MdOutlineKeyboardArrowRight />
+          </span>
+          <span className="hover:underline text-gray-500">
+            <Link href="/products"> Products </Link>
+          </span>
+          <span>
+            <MdOutlineKeyboardArrowRight />
+          </span>
+          <span className="font-[700]"> {product.name}</span>
         </div>
-
 
         <div className="lg:flex grid items-center justify-center gap-[30px] mt-6">
           <div className="mx-auto">
@@ -65,7 +72,7 @@ export default function ProductPage({ product }) {
               className="lg:w-[500px] lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
             />
           </div>
-          <div className="pt-5 w-[95%] mx-auto p-3">
+          <div className="pt-5 w-[95%] lg:w-[50%] mx-auto p-3">
             <p className="font-[600]">{product.name}</p>
             <p className="mt-4">{product.price.formatted_with_symbol}</p>
 
@@ -98,25 +105,25 @@ export default function ProductPage({ product }) {
                 <p className="font-bold">Colors</p>
                 <div className="flex gap-5 mt-2">
                   <button
-                    className="w-8 h-8 bg-[pink] rounded-full"
+                    className="w-8 h-8 bg-[pink] hover:scale-75 transistion-all duration-300 rounded-full"
                     title="pink"
                   ></button>
                   <button
-                    className="w-8 h-8 bg-[black] rounded-full"
+                    className="w-8 h-8 bg-[black] hover:scale-75 transistion-all duration-300 rounded-full"
                     title="black"
                   ></button>
                   <button
-                    className="w-8 h-8 bg-[grey] rounded-full"
+                    className="w-8 h-8 bg-[grey] hover:scale-75 transistion-all duration-300 rounded-full"
                     title="grey"
                   ></button>
                   <button
-                    className="w-8 h-8 bg-[blue] rounded-full"
+                    className="w-8 h-8 bg-[blue] hover:scale-75 transistion-all duration-300 rounded-full"
                     title="blue"
                   ></button>
                 </div>
 
                 {/* cart */}
-                <div className="grid grid-cols-2 space-x-6 mt-6 items-center justify-center">
+                <div className="grid grid-cols-2 space-x-6 mt-6 items-center justify-center gap-3">
                   <button className="md:w-[200px] lg:w-[150px] w-[150px] py-3  bg-black text-white font-bold uppercase hover:opacity-70 transition-all duration-300">
                     <Link href="/cart">ADD TO CART</Link>
                   </button>
@@ -138,7 +145,7 @@ export default function ProductPage({ product }) {
                   <p className="font-[600]">Free Shiping</p>
                 </div>
                 <p className="text-sm text-gray">
-                  Note: This will take 21 days
+                  Note: This will take 30 days
                 </p>
 
                 <div className="flex gap-2 mt-3">
@@ -147,7 +154,7 @@ export default function ProductPage({ product }) {
                   </div>
                   <p className="font-[600]">Standard Shiping</p>
                 </div>
-                <p className="text-sm text-gray">Note: This will take 7 days</p>
+                <p className="text-sm text-gray">Note: This will take 14 days</p>
 
                 <div className="flex gap-2 mt-3">
                   <span>
@@ -164,7 +171,9 @@ export default function ProductPage({ product }) {
         </div>
       </div>
 
-      <h5 className="font-[600] lg:text-2xl text-xl p-5 mt-6">YOU MAY ALSO LIKE</h5>
+      <h5 className="font-[600] lg:text-2xl text-xl p-5 mt-6 text-center">
+        YOU MAY ALSO LIKE
+      </h5>
       <div className="lg:grid-cols-4 grid gap-[20px] w-[80%] mx-auto">
         {product.related_products.map(
           ({ id, image, name, price, permalink }) => (
@@ -184,6 +193,7 @@ export default function ProductPage({ product }) {
           )
         )}
       </div>
+      <Footer />
     </>
   );
 }

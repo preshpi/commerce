@@ -5,6 +5,8 @@ import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Accordion from "../../components/Accordion";
 import Countdown from "../../components/Countdown";
+import Footer from "../../components/Footer";
+import { useState } from "react";
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
@@ -39,6 +41,17 @@ export async function getStaticPaths() {
 }
 
 export default function CategoryPage({ products, category }) {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+ 
   return (
     <>
       <Head>
@@ -46,7 +59,7 @@ export default function CategoryPage({ products, category }) {
         <meta name="keywords" content="FlairStyle" />
       </Head>
 
-      <div className=" text-white text-center bg-[red] p-5">
+      <div className=" text-white text-center bg-[#ee3a3a] p-5">
         <div className="justify-between flex items-center w-[80%] mx-auto">
           <div className="w-[200px] h-20 lg:block hidden">
             <iframe
@@ -57,7 +70,7 @@ export default function CategoryPage({ products, category }) {
             ></iframe>
           </div>
 
-          <div>
+          <div className="grid place-items-center justify-center">
             <h1 className="font-bold">Deal of the Day: 30% Off</h1>
             <Countdown />
             <button className="rounded-md px-2 py-2 text-white bg-black mt-3 hover:opacity-75">
@@ -70,7 +83,6 @@ export default function CategoryPage({ products, category }) {
               src="https://giphy.com/embed/iJmkasWu2ECDfFmssu"
               width="100%"
               height="100%"
-              frameBorder="0"
               className="giphy-embed"
               allowFullScreen
             ></iframe>
@@ -97,14 +109,27 @@ export default function CategoryPage({ products, category }) {
         <span className="font-[700]">{category.slug}</span>
       </div>
 
-      <div className="flex w-[95%] mx-auto mt-[7%] h-[700px]">
-        <div className="border w-[300px] h-full">
-          <Accordion />
-        </div>
+      <div className="w-[80%] mx-auto mt-5 lg:justify-between lg:items-between lg:flex items-center justify-center grid gap-[20px]">
         <div>
-          <ProductList products={products} />
+          <p className="disabled">Filter By Price</p>
+
         </div>
+        <form>
+          <input
+            type="search"
+            value={search}
+            onChange={handleSearch}
+            className="border w-[300px] py-2 pr-12 px-4 outline-none"
+            placeholder="Search products"
+          />
+
+        </form>
       </div>
+
+      <div>
+        <ProductList products={filteredProducts} />
+      </div>
+      <Footer />
     </>
   );
 }

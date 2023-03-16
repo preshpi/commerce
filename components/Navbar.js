@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineMenu,
-  AiOutlineShoppingCart,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { BsHeart, BsBag } from "react-icons/bs";
 import { RxPerson } from "react-icons/rx";
 import Link from "next/link";
+import commerce from "../lib/commerce";
+import SearchResults from "./SearchResults";
 
-function Navbar({ cart }) {
+function Navbar({ cart, categories }) {
+  // nav toggle
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
-
+  const navbarRef = useRef();
   const handleClose = () => {
     if (nav) {
       setNav(false);
     }
   };
 
+  // input search
+  const [navResult, setNavResult] = useState([]);
+  const [notAvailableMessage, setNotAvailableMessage] = useState("");
+  const [isInputEmpty, setIsInputEmpty] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPlaceholder, setCurrentPlaceholder] = useState("Search");
   const placeholders = [
@@ -32,11 +34,34 @@ function Navbar({ cart }) {
     "night wears",
   ];
 
-  const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
+  const fetchCategory = (value) => {
+    commerce.categories
+      .list()
+      .then((categories) => {
+        console.log(categories);
+      })
+      .catch((error) => {
+        console.log("There was an error fetching the categories", error);
+      });
+
+    const result = categories.filter((user) => {
+      return (
+        value && user && user.name && user.name.toLowerCase().includes(value)
+      );
+    });
+    setNavResult(result);
+    if (result.length === 0) {
+    setNotAvailableMessage("Item not available");
+    } else {
+    setNotAvailableMessage("");
+    }
   };
 
-  const navbarRef = useRef();
+  const handleInputChange = (value) => {
+    setSearchQuery(value);
+    fetchCategory(value);
+    setIsInputEmpty(value.trim() === "");
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -64,29 +89,41 @@ function Navbar({ cart }) {
   });
 
   return (
-    <div className="top-0 relative mx-auto p-5 w-full">
+    <div className="top-0 relative mx-auto p-[30px] w-full">
       {/* large screen */}
       <div className="lg:block md:block hidden">
-        <div className="flex justify-between">
-          <Link href="/">
+        <div className="flex justify-between items-center">
+          <Link href="/" className="flex items-center">
             <h1 className="text-3xl">FlairStyle</h1>
           </Link>
 
-          <form className="items-center justify-center relative lg:w-[700px] md:w-[300px]">
-            <input
-              className="border border-[#E4E5E4] text-[#757575] rounded py-2 px-4 pr-12 outline-none lg:w-[700px] md:w-[300px] bg-none"
-              type="text"
-              placeholder={currentPlaceholder}
-              value={searchQuery}
-              onChange={handleInputChange}
-            />
-            <button className="absolute top-0 right-0  font-bold py-2 px-4 text-white text-2xl h-full bg-black cursor-pointer">
-              <AiOutlineSearch />
-            </button>
-          </form>
+          <div className="flex-row items-center relative">
+            <form className="items-center lg:w-[700px] md:w-[300px]">
+              <input
+                className="border border-[#E4E5E4] text-[#757575] rounded py-2 px-4 pr-12 outline-none lg:w-[700px] md:w-[300px] bg-none"
+                type="text"
+                placeholder={currentPlaceholder}
+                value={searchQuery}
+                onChange={(e) => handleInputChange(e.target.value)}
+              />
+              {!isInputEmpty && (
+                <div className="absolute  bg-[#F1F3FB] border border-[#E4E5E4] shadow-lg text-black rounded py-2 px-4 pr-12 lg:w-[700px] md:w-[300px]">
+                  {notAvailableMessage !== "" ? (
+                    <p className="text-black">{notAvailableMessage}</p>
+                  ) : (
+                    <SearchResults navResult={navResult} />
+                  )}
+                </div>
+              )}
 
-          <div className="flex items-center justify-center">
-            <ul className="flex space-x-6 items-center justify-center text-xl">
+              <button className="absolute top-0 right-0 font-bold py-2 px-4 text-white text-2xl h-full bg-black cursor-pointer">
+                <AiOutlineSearch />
+              </button>
+            </form>
+          </div>
+
+          <div className="flex items-center">
+            <ul className="flex space-x-6 items-center text-xl">
               <li className="cursor-pointer">
                 <Link href="/profile">
                   <RxPerson />
@@ -142,7 +179,18 @@ function Navbar({ cart }) {
             </li>
 
             <li className="cursor-pointer">
-              <AiOutlineShoppingCart />
+              <Link href="/cart">
+                <button className="inline-flex space-x-4 relative">
+                  <BsBag />
+                  {cart !== null ? (
+                    <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
+                      {cart.total_items}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </button>
+              </Link>
             </li>
           </ul>
         </div>

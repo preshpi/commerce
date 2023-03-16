@@ -1,13 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import Category from "./Category";
-import Product from "./Product";
 import Head from "next/head";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 export default function CategoryList({ categories }) {
-  if (!categories) return null;
-  console.log(categories);
   return (
     <>
       <Head>

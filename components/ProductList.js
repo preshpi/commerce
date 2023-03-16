@@ -20,7 +20,7 @@ export default function ProductList({ products, onAddToCart }) {
   );
 }
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard ({ product, onAddToCart }) {
   // hover on image to get add to cart
   const [isHovered, setIshovered] = useState(false);
   const handleMouseEnter = () => {
@@ -45,7 +45,7 @@ function ProductCard({ product, onAddToCart }) {
           width={300}
           height={300}
           loading="lazy"
-          className="object-cover lg:w-[300px] lg:h-[300px] w-[250px] h-[250px] relative"
+          className="object-cover lg:w-[300px] lg:h-[400px] w-[300px] h-[300px] relative"
         />
       </Link>
 

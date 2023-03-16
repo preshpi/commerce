@@ -5,8 +5,8 @@ import Link from "next/link";
 const ShopByCart = ({ categories }) => {
   const visibleCategories = categories.slice(0, 4);
   return (
-    <div className="w-[95%] mx-auto mt-[6%]">
-      <h2 className="text-center text-3xl font-[600] pt-6">
+    <div className="w-[95%] mx-auto">
+      <h2 className="text-center text-3xl font-[600] mt-6">
         Shop By Categories
       </h2>
 

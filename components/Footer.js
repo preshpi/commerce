@@ -3,20 +3,25 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="h-[80px] bg-[#222] text-white mt-[4%] grid grid-cols-4 place-items-center justify-between text-x font-[400]">
-      <a
-        href="mailto:ijeomaegwuenu22@gmail.com"
-        className="cursor-pointer lg:hover:scale-75 hover:opacity-75 transition-all duration-300"
-      >
-        Contact us
-      </a>
-      <Link
-        href="/aboutus"
-        className="cursor-pointer lg:hover:scale-75 hover:opacity-75 transition-all duration-300"
-      >
-        About FlairStyle{" "}
-      </Link>
-      <p className="lg:animate-pulse">© 2023 FlairStyle All rights reserved.</p>
+    <div className="lg:h-[80px] md:h-[100px] h-[200px] bg-[#222] text-white mt-[4%] grid lg:grid-cols-4 md:grid-cols-2  place-items-center  md:justify-between  text-x font-[400]">
+      <div>
+        <Link
+          href="/aboutus"
+          className="cursor-pointer lg:hover:scale-75 hover:opacity-75 transition-all duration-300"
+        >
+          About FlairStyle{" "}
+        </Link>
+      </div>
+
+      <div>
+        <a
+          href="mailto:ijeomaegwuenu22@gmail.com"
+          className="cursor-pointer lg:hover:scale-75 hover:opacity-75 transition-all duration-300"
+        >
+          Contact us
+        </a>
+      </div>
+
       <ul className="flex space-x-6 items-center justify-center">
         <li className="w-[50px] cursor-pointer lg:hover:scale-75 hover:opacity-75 transition-all duration-300">
           <Image
@@ -46,6 +51,12 @@ const Footer = () => {
           />
         </li>
       </ul>
+
+      <div>
+        <p className="lg:animate-pulse text-right w-[300px]">
+          © 2023 FlairStyle All rights reserved.
+        </p>
+      </div>
     </div>
   );
 };
