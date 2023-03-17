@@ -3,10 +3,10 @@ import ProductList from "../../components/ProductList";
 import Head from "next/head";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import Accordion from "../../components/Accordion";
 import Countdown from "../../components/Countdown";
 import Footer from "../../components/Footer";
 import { useState } from "react";
+import PriceSlider from "../../components/PriceRange";
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
@@ -42,9 +42,15 @@ export async function getStaticPaths() {
 
 export default function CategoryPage({ products, category }) {
   const [search, setSearch] = useState("");
+  const [notAvailableMessage, setNotAvailableMessage] = useState("");
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    if (filteredProducts.length === 0) {
+      setNotAvailableMessage("Item not available");
+    } else {
+      setNotAvailableMessage("");
+    }
   };
 
   const filteredProducts = products.filter((product) =>
@@ -111,8 +117,7 @@ export default function CategoryPage({ products, category }) {
 
       <div className="w-[80%] mx-auto mt-5 lg:justify-between lg:items-between lg:flex items-center justify-center grid gap-[20px]">
         <div>
-          <p className="disabled">Filter By Price</p>
-
+            <PriceSlider products={products}/>
         </div>
         <form>
           <input
@@ -127,7 +132,13 @@ export default function CategoryPage({ products, category }) {
       </div>
 
       <div>
+        {filteredProducts.length === 0 ? (
+        <p className="text-black h-[70vh] flex items-center justify-center text-5xl uppercase font-semibold animate-pulse">
+          Item <span className="text-[red] italic"> not </span> available
+        </p>
+      ) : (
         <ProductList products={filteredProducts} />
+      )}
       </div>
       <Footer />
     </>

@@ -201,9 +201,19 @@ function Navbar({ cart, categories }) {
             type="text"
             placeholder={currentPlaceholder}
             value={searchQuery}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.value)}
           />
-          <button className="absolute top-0 right-0  font-bold py-1 px-4 text-white text-2xl h-full bg-black cursor-pointer">
+          {!isInputEmpty && (
+            <div className="absolute  bg-[#F1F3FB] border border-[#E4E5E4] shadow-lg text-black rounded py-2 px-4 pr-12 w-[334px] md:w-[300px]">
+              {notAvailableMessage !== "" ? (
+                <p className="text-black">{notAvailableMessage}</p>
+              ) : (
+                <SearchResults navResult={navResult} />
+              )}
+            </div>
+          )}
+
+          <button className="absolute top-0 right-0 font-bold py-2 px-4 text-white text-2xl h-full bg-black cursor-pointer">
             <AiOutlineSearch />
           </button>
         </form>

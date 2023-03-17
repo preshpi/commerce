@@ -7,6 +7,7 @@ import { AiOutlineSafety } from "react-icons/ai";
 import FavouriteButton from "../../components/FavouriteButton";
 import Footer from "../../components/Footer";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import ShareIcons from "../../components/ShareIcons";
 
 export async function getStaticProps({ params }) {
   const { permalink } = params;
@@ -57,7 +58,7 @@ export default function ProductPage({ product }) {
           <span>
             <MdOutlineKeyboardArrowRight />
           </span>
-          <span className="font-[700]"> {product.name}</span>
+          <span className="font-[700]">{product.name}</span>
         </div>
 
         <div className="lg:flex grid items-center justify-center gap-[30px] mt-6">
@@ -133,6 +134,10 @@ export default function ProductPage({ product }) {
                     </button>
                   </div>
                 </div>
+
+                  <div>
+                    <ShareIcons product={product}/>
+                  </div>
               </div>
 
               {/* delivery */}

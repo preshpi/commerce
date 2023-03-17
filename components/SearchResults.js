@@ -19,7 +19,7 @@ function Resultsearch({ result, category }) {
     <Link
       href={`/categories/${category.slug}`}
     >
-      <p className="space-y-6 p-2 hover:bg-slate-50 hover:shadow-sm hover:rounded-md cursor-pointer w-full">
+      <p className="space-y-6 p-1 hover:bg-slate-50 hover:shadow-sm hover:rounded-md cursor-pointer lg:w-full w-[300px]">
         {result.name}
       </p>
     </Link>
