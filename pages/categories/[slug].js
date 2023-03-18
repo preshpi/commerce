@@ -6,7 +6,6 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Countdown from "../../components/Countdown";
 import Footer from "../../components/Footer";
 import { useState } from "react";
-import PriceSlider from "../../components/PriceRange";
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
@@ -43,6 +42,8 @@ export async function getStaticPaths() {
 export default function CategoryPage({ products, category }) {
   const [search, setSearch] = useState("");
   const [notAvailableMessage, setNotAvailableMessage] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(2000);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -53,8 +54,28 @@ export default function CategoryPage({ products, category }) {
     }
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase())
+
+  const handleMinPrice = (e) => {
+    const value = e.target.value;
+    if (/^\d+$/.test(value) || value === "") {
+      setMinPrice(parseInt(value));
+    }
+  };
+
+  const handleMaxPrice = (e) => {
+    const value = e.target.value;
+    if (/^\d+$/.test(value) || value === "") {
+      setMaxPrice(parseInt(value));
+    }
+  };
+
+
+
+  const filteredProducts = products.filter(
+    (product) =>
+      product.price.raw >= minPrice &&
+      product.price.raw <= maxPrice && // filter based on price range
+      product.name.toLowerCase().includes(search.toLowerCase())
   );
 
  
@@ -116,8 +137,27 @@ export default function CategoryPage({ products, category }) {
       </div>
 
       <div className="w-[80%] mx-auto mt-5 lg:justify-between lg:items-between lg:flex items-center justify-center grid gap-[20px]">
-        <div>
-            <PriceSlider products={products}/>
+        <div className="flex gap-[20px] items-start justify-start mt-4 lg:mt-0">
+          <h2 className="text-lg mb-2">Price:</h2>
+          <input
+            type="number"
+            id="minPrice"
+            name="minPrice"
+            value={minPrice}
+            onChange={handleMinPrice}
+            className="border w-[70px] py-1 text-center outline-none"
+            placeholder="Min"
+          />
+          <p>-</p>
+          <input
+            type="number"
+            id="maxPrice"
+            name="maxPrice"
+            value={maxPrice}
+            onChange={handleMaxPrice}
+            className="border w-[70px] py-1 text-center outline-none"
+            placeholder="Max"
+          />
         </div>
         <form>
           <input
@@ -127,18 +167,17 @@ export default function CategoryPage({ products, category }) {
             className="border w-[300px] py-2 pr-12 px-4 outline-none"
             placeholder="Search products"
           />
-
         </form>
       </div>
 
       <div>
         {filteredProducts.length === 0 ? (
-        <p className="text-black h-[70vh] flex items-center justify-center text-5xl uppercase font-semibold animate-pulse">
-          Item <span className="text-[red] italic"> not </span> available
-        </p>
-      ) : (
-        <ProductList products={filteredProducts} />
-      )}
+          <p className="text-black lg:h-[70vh] h-[50vh] flex items-center justify-center lg:text-5xl text-3xl uppercase font-semibold animate-pulse">
+            Item <span className="text-[red] italic"> not </span> available
+          </p>
+        ) : (
+          <ProductList products={filteredProducts} />
+        )}
       </div>
       <Footer />
     </>
