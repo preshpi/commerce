@@ -5,6 +5,11 @@ import { RxPerson } from "react-icons/rx";
 import Link from "next/link";
 import commerce from "../lib/commerce";
 import SearchResults from "./SearchResults";
+import Category from "./Category";
+import { HiArrowNarrowRight } from "react-icons/hi";
+import { FcAbout } from "react-icons/fc";
+import { FaTiktok, FaInstagram } from "react-icons/fa";
+import Location from "./Location";
 
 function Navbar({ cart, categories }) {
   // nav toggle
@@ -51,9 +56,9 @@ function Navbar({ cart, categories }) {
     });
     setNavResult(result);
     if (result.length === 0) {
-    setNotAvailableMessage("Item not available");
+      setNotAvailableMessage("Item not available");
     } else {
-    setNotAvailableMessage("");
+      setNotAvailableMessage("");
     }
   };
 
@@ -225,12 +230,56 @@ function Navbar({ cart, categories }) {
               : "h-full fixed bg-[white] w-[80%] left-0 top-0 z-10 transition-all duration-300 drop-shadow-lg"
           }
         >
-          <div className="flex space-x-5 w-full pt-5 p-3 items-center">
-            <AiOutlineClose
-              onClick={handleClose}
-              className="text-[18px] font-bold items-center justify-center cursor-pointer text-black transition-all duration-300"
-            />
+          <div className="flex space-x-5 bg-[#222] p-5 text-white w-full items-between justify-between">
             <h1 className="text-2xl">FlairStyle</h1>
+            <div className="flex items-center justify-center text-3xl">
+              <AiOutlineClose onClick={handleClose} className="cursor-pointer"/>
+            </div>
+          </div>
+
+          <div className="p-[20px] space-y-6">
+            {categories.map((category) => (
+              <div key={category.slug}>
+                <Link
+                  href={`/categories/${category.slug}`}
+                  className="flex justify-between"
+                >
+                  <p className="hover:skew-y-6	transistion-all duration-300 hover:opacity-75">
+                    <Category {...category} />
+                  </p>
+                  <HiArrowNarrowRight />
+                </Link>
+              </div>
+            ))}{" "}
+          </div>
+
+          <hr />
+
+          <div className="p-[20px] space-y-4 text-[14px]">
+            <Link href="/profile" className="flex justify-between">
+              <p className="hover:underline">My Account</p>
+              <RxPerson />
+            </Link>
+            <Link href="/profile" className="flex justify-between">
+              <p>About Us</p>
+              <FcAbout />
+            </Link>
+            <div className="flex justify-between">
+              <p>Country</p>
+              <Location />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center p-[20px] text-xl space-x-6 border-t ">
+            <Link href="https://tr.ee/rFwIv2NAqI" className="hover:opacity-75">
+              <FaTiktok />
+            </Link>
+            <Link
+              href="https://www.instagram.com/presh_pie/"
+              className="hover:opacity-75"
+            >
+              <FaInstagram />
+            </Link>
           </div>
         </div>
       </div>
