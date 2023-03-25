@@ -11,9 +11,9 @@ export default function Product({ name, price, permalink }) {
         >
           {name}
         </Link>
-        <span>
+        {/* <span>
           <FavouriteButton className="cursor-pointer" />
-        </span>
+        </span> */}
       </div>
 
       <p className="mt-[2%]">{price.formatted_with_symbol}</p>

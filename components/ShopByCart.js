@@ -10,7 +10,7 @@ const ShopByCart = ({ categories }) => {
         Shop By Categories
       </h2>
 
-      <ul className="grid-cols-2 grid lg:grid-cols-4 w-[80%] mx-auto gap-[20px] mt-[5%] mb-[3%]">
+      <ul className="grid-cols-2 grid lg:grid-cols-4 w-[80%] mx-auto gap-[20px] mt-[5%] mb-[3%] relative">
         {visibleCategories.map((category) => (
           <li key={category.slug}>
             <Link

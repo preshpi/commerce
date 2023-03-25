@@ -8,6 +8,7 @@ import FavouriteButton from "../../components/FavouriteButton";
 import Footer from "../../components/Footer";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ShareIcons from "../../components/ShareIcons";
+import ReactImageMagnify from "react-image-magnify";
 
 export async function getStaticProps({ params }) {
   const { permalink } = params;
@@ -37,6 +38,7 @@ export async function getStaticPaths() {
 }
 
 export default function ProductPage({ product }) {
+  const zommImage = product.image.url;
   return (
     <>
       <Head>
@@ -72,6 +74,24 @@ export default function ProductPage({ product }) {
               loading="lazy"
               className="lg:w-[500px] lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
             />
+
+            {/* <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Wristwatch by Ted Baker London",
+                  isFluidWidth: true,
+                  src: zommImage,
+                  sizes:
+                    "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                },
+                largeImage: {
+                  src: zommImage,
+                  width: 1200,
+                  height: 1800,
+                },
+                isHintEnabled: true,
+              }}
+            /> */}
           </div>
           <div className="pt-5 w-[95%] lg:w-[50%] mx-auto p-3">
             <p className="font-[600]">{product.name}</p>
@@ -135,9 +155,9 @@ export default function ProductPage({ product }) {
                   </div>
                 </div>
 
-                  <div>
-                    <ShareIcons product={product}/>
-                  </div>
+                <div>
+                  <ShareIcons product={product} />
+                </div>
               </div>
 
               {/* delivery */}
@@ -159,7 +179,9 @@ export default function ProductPage({ product }) {
                   </div>
                   <p className="font-[600]">Standard Shiping</p>
                 </div>
-                <p className="text-sm text-gray">Note: This will take 14 days</p>
+                <p className="text-sm text-gray">
+                  Note: This will take 14 days
+                </p>
 
                 <div className="flex gap-2 mt-3">
                   <span>

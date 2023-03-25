@@ -11,7 +11,10 @@ import { FcAbout } from "react-icons/fc";
 import { FaTiktok, FaInstagram } from "react-icons/fa";
 import Location from "./Location";
 
-function Navbar({ cart, categories }) {
+function Navbar({ categories }) {
+  // a state for the cart to display the cart total items
+  const [cart, setCart] = useState(null);
+
   // nav toggle
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
@@ -21,6 +24,23 @@ function Navbar({ cart, categories }) {
       setNav(false);
     }
   };
+
+  // cart to display total items
+  const fetchCart = () => {
+    commerce.cart
+      .retrieve()
+      .then((cart) => {
+        console.log(cart);
+        setCart(cart);
+      })
+      .catch((error) => {
+        console.log("There was an error fetching the cart", error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
   // input search
   const [navResult, setNavResult] = useState([]);
@@ -134,22 +154,18 @@ function Navbar({ cart, categories }) {
                   <RxPerson />
                 </Link>
               </li>
-              <li className="cursor-pointer flex">
-                <Link href="/favourite">
+              {/* <li className="cursor-pointer flex">
+                <Link href="/wishlist">
                   <BsHeart />
                 </Link>
-              </li>
+              </li> */}
               <li className="cursor-pointer">
                 <Link href="/cart">
-                  <button className="inline-flex space-x-4 relative">
+                  <button className="inline-flex space-x-4">
                     <BsBag />
-                    {cart !== null ? (
-                      <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
-                        {cart.total_items}
-                      </span>
-                    ) : (
-                      ""
-                    )}
+                    <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
+                      {cart?.total_items}
+                    </span>
                   </button>
                 </Link>
               </li>
@@ -174,26 +190,24 @@ function Navbar({ cart, categories }) {
 
           <ul className="flex space-x-6 items-center justify-center text-xl">
             <li className="cursor-pointer">
+              <Link href="/profile">
               <RxPerson />
+              </Link>
             </li>
 
-            <li className="cursor-pointer flex">
+            {/* <li className="cursor-pointer flex">
               <Link href="/wishlist">
                 <BsHeart />
               </Link>
-            </li>
+            </li> */}
 
             <li className="cursor-pointer">
               <Link href="/cart">
                 <button className="inline-flex space-x-4 relative">
                   <BsBag />
-                  {cart !== null ? (
-                    <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
-                      {cart.total_items}
-                    </span>
-                  ) : (
-                    ""
-                  )}
+                  <span className="bg-[blue] absolute rounded-full text-white w-5 h-5 text-sm">
+                    {cart?.total_items}
+                  </span>
                 </button>
               </Link>
             </li>
@@ -233,7 +247,10 @@ function Navbar({ cart, categories }) {
           <div className="flex space-x-5 bg-[#222] p-5 text-white w-full items-between justify-between">
             <h1 className="text-2xl">FlairStyle</h1>
             <div className="flex items-center justify-center text-3xl">
-              <AiOutlineClose onClick={handleClose} className="cursor-pointer"/>
+              <AiOutlineClose
+                onClick={handleClose}
+                className="cursor-pointer"
+              />
             </div>
           </div>
 

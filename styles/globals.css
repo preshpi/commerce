@@ -87,30 +87,21 @@
   }
 }
 
-.range {
-  -webkit-appearance: none;
-  height: 3px;
-  background: #ddd;
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  z-index: 2222;
+#imageMagifer {
+  width: 342px;
+  height: 513px;
 }
 
-.title-range{
-  content: '';
-  background: #EE3A3A;
-  border: 3px solid #fff;
-  z-index: -1;
-  transform: translateX(-50%) rotate(45deg);
-  border-bottom-left-radius: 50%;
-  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
 
+.accountbg{
+background: rgba(219, 220, 251, 0.79);
+background: -webkit-linear-gradient(63deg, rgba(219, 220, 251, 0.79) 0%, #e5d2ef 100%);
+background: linear-gradient(63deg, rgba(219, 220, 251, 0.79) 0%, #e5d2ef 100%);
 }
 
-.title-text{
-    transform: translatey(-50%) rotate(45deg);
-
+.glassaccount{
+background: rgba(255,255,255,0.4);
+-webkit-backdrop-filter: blur(7px);
+backdrop-filter: blur(7px);
+border: 1px solid rgba(255,255,255,0.2);
 }

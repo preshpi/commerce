@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import Product from "./Product";
-import { useState } from 'react';
+import { useState } from "react";
+import commerce from "../lib/commerce";
 
-export default function ProductList({ products, onAddToCart }) {
+export default function ProductList({ products }) {
   const displayedProducts = products.slice(0, 12); // Display only the first 12 products
   if (!products) return null;
 
@@ -12,7 +13,7 @@ export default function ProductList({ products, onAddToCart }) {
       <ul className="gap-[30px] grid lg:grid-cols-4 md:grid-cols-2">
         {displayedProducts.map((product) => (
           <li key={product.permalink}>
-            <ProductCard product={product} onAddToCart={onAddToCart} />
+            <ProductCard product={product} />
           </li>
         ))}
       </ul>
@@ -20,17 +21,30 @@ export default function ProductList({ products, onAddToCart }) {
   );
 }
 
-function ProductCard ({ product, onAddToCart }) {
-  // hover on image to get add to cart
-  const [isHovered, setIshovered] = useState(false);
+function ProductCard({ product }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const handleMouseEnter = () => {
-    setIshovered(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIshovered(false);
+    setIsHovered(false);
   };
-  
+
+  const handleAddToCart = () => {
+    commerce.cart
+      .add(product.id, 1)
+      .then((item) => {
+        console.log(`Added ${product.name} to cart:`, item);
+      })
+      .catch((error) => {
+        console.log(
+          `There was an error adding ${product.name} to the cart:`,
+          error
+        );
+      });
+  };
 
   return (
     <div
@@ -52,13 +66,14 @@ function ProductCard ({ product, onAddToCart }) {
       {isHovered && (
         <div className="w-full bottom-[35%] absolute flex items-center justify-center">
           <button
-            onClick={() => onAddToCart(product.id, 1)}
             className="bg-white opacity-75 px-8 py-2 text-black"
+            onClick={handleAddToCart}
           >
             Add to cart
           </button>
         </div>
       )}
+
       <Product {...product} />
     </div>
   );

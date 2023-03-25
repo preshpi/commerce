@@ -33,7 +33,7 @@ export default function CategoryList({ categories }) {
                 href={`/categories/${category.slug}`}
                 className="justify-center items-center flex"
               >
-                <div className="bg-gray-300 rounded-lg w-[190px] h-12 shadow-md flex items-center justify-center  hover:scale-90 hover:shadow-inner hover:bg-teal-50  skew-y-6 delay-100  hover:translate-x-4 transistion-all duration-300">
+                <div className="bg-gray-300 rounded-lg w-[190px] lg:h-12 h-[39px] shadow-md flex items-center justify-center  hover:scale-90 hover:shadow-inner hover:bg-teal-50  lg:skew-y-6 delay-100  hover:translate-x-4 transistion-all duration-300">
                   <Category {...category} />
                 </div>
               </Link>
