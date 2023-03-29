@@ -9,7 +9,7 @@ import { Collapse } from "antd";
 const { Panel } = Collapse;
 
 const AboutUs = () => {
-  return (
+  return (  
     <>
       <Head>
         <title> FlairStyle | About</title>

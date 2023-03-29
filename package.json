@@ -21,6 +21,7 @@
     "react-icons": "^4.7.1",
     "react-image-magnify": "^2.7.4",
     "react-leaflet": "^4.2.1",
+    "react-loading-skeleton": "^3.2.0",
     "react-share": "^4.4.1"
   },
   "devDependencies": {

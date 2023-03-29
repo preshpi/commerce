@@ -1,12 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
 import Product from "./Product";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import commerce from "../lib/commerce";
+import { Skeleton } from "antd";
 
 export default function ProductList({ products }) {
-  const displayedProducts = products.slice(0, 12); // Display only the first 12 products
-  if (!products) return null;
+  const [loading, setLoading] = useState(!products);
+  const displayedProducts = products ? products.slice(0, 12) : [];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000); // Wait for 10 seconds before updating the loading state
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%]">
+        <ul className="gap-[30px] grid lg:grid-cols-4 md:grid-cols-2">
+          {displayedProducts.map((_, index) => (
+            <li key={index}>
+              <Skeleton active />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%]">
