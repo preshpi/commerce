@@ -18,7 +18,7 @@ export async function getStaticProps() {
 }
 
 export default function CategoriesPage({ categories, products, onAddToCart }) {
-  console.log(products);
+  console.log(categories);
   return (
     <>
       <CategoryList categories={categories} />

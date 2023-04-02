@@ -1,4 +1,3 @@
-import commerce from "../../lib/commerce";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +7,9 @@ import FavouriteButton from "../../components/FavouriteButton";
 import Footer from "../../components/Footer";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ShareIcons from "../../components/ShareIcons";
+import ModalButton from "../../components/Modal";
+import commerce from "../../lib/commerce";
+
 
 export async function getStaticProps({ params }) {
   const { permalink } = params;
@@ -37,7 +39,6 @@ export async function getStaticPaths() {
 }
 
 export default function ProductPage({ product }) {
-  const zommImage = product.image.url;
   return (
     <>
       <Head>
@@ -73,8 +74,6 @@ export default function ProductPage({ product }) {
               loading="lazy"
               className="lg:w-[500px] lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
             />
-
-
           </div>
           <div className="pt-5 w-[95%] lg:w-[50%] mx-auto p-3">
             <p className="font-[600]">{product.name}</p>
@@ -128,9 +127,7 @@ export default function ProductPage({ product }) {
 
                 {/* cart */}
                 <div className="grid grid-cols-2 space-x-6 mt-6 items-center justify-center gap-3">
-                  <button className="md:w-[200px] lg:w-[150px] w-[150px] py-3  bg-black text-white font-bold uppercase hover:opacity-70 transition-all duration-300">
-                    <Link href="/cart">ADD TO CART</Link>
-                  </button>
+                  <ModalButton product={product} />
                   <div>
                     <button className="rounded-[50px] border border-gray px-3 py-3 cursor-pointer">
                       <FavouriteButton className="text-5xl" />

@@ -7,8 +7,7 @@ import { Skeleton } from "antd";
 
 export default function ProductList({ products }) {
   const [loading, setLoading] = useState(!products);
-  const displayedProducts = products ? products.slice(0, 12) : [];
-
+  const displayedProducts = products 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);

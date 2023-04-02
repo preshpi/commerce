@@ -30,12 +30,8 @@ function Navbar({ categories }) {
     commerce.cart
       .retrieve()
       .then((cart) => {
-        console.log(cart);
         setCart(cart);
       })
-      .catch((error) => {
-        console.log("There was an error fetching the cart", error);
-      });
   };
 
   useEffect(() => {
@@ -49,25 +45,22 @@ function Navbar({ categories }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPlaceholder, setCurrentPlaceholder] = useState("Search");
   const placeholders = [
-    "pants",
     "shoes",
     "bags",
     "accessories",
     "sweat shirts",
-    "beach wears",
-    "hats",
-    "night wears",
+    "sneakers",
+    "human hair",
   ];
 
   const fetchCategory = (value) => {
-    commerce.categories
-      .list()
-      .then((categories) => {
-        console.log(categories);
-      })
-      .catch((error) => {
-        console.log("There was an error fetching the categories", error);
-      });
+    // commerce.categories
+    //   .list()
+    //   .then((categories) => {
+    //   })
+    //   .catch((error) => {
+    //     console.log("There was an error fetching the categories", error);
+    //   });
 
     const result = categories.filter((user) => {
       return (
@@ -154,11 +147,6 @@ function Navbar({ categories }) {
                   <RxPerson />
                 </Link>
               </li>
-              {/* <li className="cursor-pointer flex">
-                <Link href="/wishlist">
-                  <BsHeart />
-                </Link>
-              </li> */}
               <li className="cursor-pointer">
                 <Link href="/cart">
                   <button className="inline-flex space-x-4">
@@ -194,12 +182,6 @@ function Navbar({ categories }) {
               <RxPerson />
               </Link>
             </li>
-
-            {/* <li className="cursor-pointer flex">
-              <Link href="/wishlist">
-                <BsHeart />
-              </Link>
-            </li> */}
 
             <li className="cursor-pointer">
               <Link href="/cart">

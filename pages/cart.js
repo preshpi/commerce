@@ -9,6 +9,7 @@ import { ImBin } from "react-icons/im";
 import { Carousel } from "antd";
 import { TbTruckDelivery } from "react-icons/tb";
 import Footer from "../components/Footer";
+import Checkout from "../components/Checkout";
 
 export default function Cart() {
   const carouselData = [
@@ -109,20 +110,20 @@ export default function Cart() {
           </span>
         </div>
         <div className="lg:flex md:flex grid w-[80%] mx-auto items-center justify-center">
-          <div className="lg:w-[500px] w-[300px]">
+          <div className="lg:w-[500px] w-[300px] lg:h-[350px] h-[310px]">
             <h4 className="text-3xl text-center mt-[8%]">Your Shopping Cart</h4>
             {cart?.line_items.map((item) => (
               <div key={item.id} className="mt-[8%] grid grid-cols-2">
                 <div>
                   <h3 className="font-[600 mb-3">{item.name}</h3>
-                  <Image
+                  {/* <Image
                     src={item.image.url}
                     alt={item.name}
                     title={item.name}
                     width={80}
                     height={80}
                     loading="lazy"
-                  />
+                  /> */}
                 </div>
                 <div className="flex flex-col place-items-center justify-center">
                   <p>{item.price.formatted_with_symbol}</p>
@@ -155,17 +156,26 @@ export default function Cart() {
                 </div>
               </div>
             ))}
-            <div className="flex items-center justify-center">
-              <button
-                onClick={clearCart}
-                className="text-x bg-[#222] text-white hover:opacity-75 px-2 py-2 flex items-center gap-2 rounded mt-5"
-              >
-                <ImBin />
-                Clear cart
-              </button>
+            <div className="flex items-center justify-center mt-[15%] w-[50%] mx-auto">
+              {cart && cart.total_items > 0 ? (
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={clearCart}
+                    className="text-x bg-[#222] text-white hover:opacity-75 px-2 py-2 flex items-center gap-2 rounded mt-5"
+                  >
+                    <ImBin />
+                    Clear cart
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-8 h-full grid place-items-center justify-center text-xl">
+                  <p>Go shopping</p>
+                  <p>Your cart is empty</p>
+                </div>
+              )}
             </div>
           </div>
-          <div className="lg:w-[500px] bg-gray-50 lg:h-[350px] h-[310px] w-[300px] lg:mt-[5%] mt-[11%] shadow-md p-5 mb-[8%]">
+          <div className="lg:w-[500px] bg-gray-50 lg:h-[350px] h-[310px] w-[300px] lg:mt-[8%] mt-[11%] shadow-md p-5 mb-[8%]">
             <div className="flex justify-between items-center mt-[10%]">
               <p className="text-2xl font-bold">Total</p>
               <p>{cart?.subtotal.formatted_with_symbol}</p>
@@ -181,10 +191,10 @@ export default function Cart() {
               </div>
             </div>
 
-            <hr className="border-black border-1 lg:mt-[2%] mt-[10%]"/>
+            <hr className="border-black border-1 lg:mt-[2%] mt-[10%]" />
             <div className="mt-[5%] flex items-center justify-center">
               <button className="lg:px-[50px] px-[30px] py-3 bg-black hover:opacity-75 text-white">
-               <Link href="/checkout">Checkout</Link> 
+               <Checkout/>
               </button>
             </div>
 
@@ -222,7 +232,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

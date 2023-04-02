@@ -20,17 +20,17 @@ export async function getStaticProps() {
 export default function ProductsPage({ products }) {
   const [search, setSearch] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(2000);
+  const [maxPrice, setMaxPrice] = useState(50000);
   const [notAvailableMessage, setNotAvailableMessage] = useState("");
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    if (filteredProducts.length === 0) {
-      setNotAvailableMessage("Item not available");
-    } else {
-      setNotAvailableMessage("");
-    }
-  };
+ const handleSearch = (e) => {
+   setSearch(e.target.value);
+   if (filteredProducts.length === 0) {
+     setNotAvailableMessage("Item not available");
+   } else {
+     setNotAvailableMessage("");
+   }
+ };
 
   const handleMinPrice = (e) => {
     const value = e.target.value;
@@ -165,14 +165,15 @@ export default function ProductsPage({ products }) {
           />
         </form>
       </div>
-      {filteredProducts.length === 0 ? (
-        <p className="text-black h-[70vh] flex items-center justify-center lg:text-5xl text-3xl uppercase font-semibold animate-pulse">
-          Item <span className="text-[red] italic"> not </span> available
-        </p>
-      ) : (
-        <ProductList products={filteredProducts} />
-      )}
-
+      <div>
+        {filteredProducts.length === 0 ? (
+          <p className="text-black lg:h-[70vh] h-[50vh] flex items-center justify-center lg:text-5xl text-3xl uppercase font-semibold animate-pulse">
+            Item <span className="text-[red] italic"> not </span> available
+          </p>
+        ) : (
+          <ProductList products={filteredProducts} />
+        )}
+      </div>
       <Footer />
     </>
   );

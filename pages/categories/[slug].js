@@ -43,7 +43,7 @@ export default function CategoryPage({ products, category }) {
   const [search, setSearch] = useState("");
   const [notAvailableMessage, setNotAvailableMessage] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(2000);
+  const [maxPrice, setMaxPrice] = useState(50000);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -53,7 +53,6 @@ export default function CategoryPage({ products, category }) {
       setNotAvailableMessage("");
     }
   };
-
 
   const handleMinPrice = (e) => {
     const value = e.target.value;
@@ -69,8 +68,6 @@ export default function CategoryPage({ products, category }) {
     }
   };
 
-
-
   const filteredProducts = products.filter(
     (product) =>
       product.price.raw >= minPrice &&
@@ -78,7 +75,6 @@ export default function CategoryPage({ products, category }) {
       product.name.toLowerCase().includes(search.toLowerCase())
   );
 
- 
   return (
     <>
       <Head>
