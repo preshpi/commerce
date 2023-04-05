@@ -9,6 +9,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ShareIcons from "../../components/ShareIcons";
 import ModalButton from "../../components/Modal";
 import commerce from "../../lib/commerce";
+import sanitizeHtml from "sanitize-html";
 
 
 export async function getStaticProps({ params }) {
@@ -39,6 +40,11 @@ export async function getStaticPaths() {
 }
 
 export default function ProductPage({ product }) {
+    const sanitizedDescription = sanitizeHtml(product.description, {
+    allowedTags: [], // remove all tags
+    allowedAttributes: {}, // remove all attributes
+  });
+
   return (
     <>
       <Head>
@@ -79,12 +85,9 @@ export default function ProductPage({ product }) {
             <p className="font-[600]">{product.name}</p>
             <p className="mt-4">{product.price.formatted_with_symbol}</p>
 
-            <ul className="list-disc px-3 mt-5">
-              <li>Lorem ipsum dolor sit</li>
-              <li>Phasellus finibus</li>
-              <li>Curabitur tincidunt</li>
-            </ul>
 
+
+            <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
             {/* colors and add to cart */}
             <p className="font-bold mt-6">Size (US)</p>
             <div className="flex gap-5 mt-2">
@@ -126,13 +129,8 @@ export default function ProductPage({ product }) {
                 </div>
 
                 {/* cart */}
-                <div className="grid grid-cols-2 space-x-6 mt-6 items-center justify-center gap-3">
+                <div className="mt-6 items-center justify-center">
                   <ModalButton product={product} />
-                  <div>
-                    <button className="rounded-[50px] border border-gray px-3 py-3 cursor-pointer">
-                      <FavouriteButton className="text-5xl" />
-                    </button>
-                  </div>
                 </div>
 
                 <div>

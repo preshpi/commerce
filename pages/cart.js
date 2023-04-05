@@ -116,14 +116,14 @@ export default function Cart() {
               <div key={item.id} className="mt-[8%] grid grid-cols-2">
                 <div>
                   <h3 className="font-[600 mb-3">{item.name}</h3>
-                  {/* <Image
+                  <Image
                     src={item.image.url}
                     alt={item.name}
                     title={item.name}
                     width={80}
                     height={80}
                     loading="lazy"
-                  /> */}
+                  />
                 </div>
                 <div className="flex flex-col place-items-center justify-center">
                   <p>{item.price.formatted_with_symbol}</p>
