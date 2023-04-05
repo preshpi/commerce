@@ -109,8 +109,8 @@ export default function Cart() {
             <Link href="/">Home </Link>
           </span>
         </div>
-        <div className="lg:flex md:flex grid w-[80%] mx-auto items-center justify-center">
-          <div className="lg:w-[500px] w-[300px] lg:h-[350px] h-[310px]">
+        <div className="lg:flex md:flex grid w-[80%] mx-auto">
+          <div className="lg:w-[500px] w-[300px]">
             <h4 className="text-3xl text-center mt-[8%]">Your Shopping Cart</h4>
             {cart?.line_items.map((item) => (
               <div key={item.id} className="mt-[8%] grid grid-cols-2">
