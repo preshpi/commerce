@@ -8,7 +8,7 @@ export default function ProductsInCategories({ products, onAddToCart }) {
   if (!products) return null;
 
   return (
-    <div className="lg:w-[80%] md:w-[85%] mx-auto place-items-center grid justify-center lg:mt-[5%] mt-[15%] md:mt-[10%]">
+    <div className="lg:w-[80%] md:w-[85%] mx-auto place-items-center grid justify-center lg:mt-[5%] mt-[15%] md:mt-[10%] mb-[40px]">
       <ul className="gap-[50px] md:gap-[30px] grid lg:grid-cols-4 md:grid-cols-3">
         {displayedProducts.map((product) => (
           <li key={product.permalink}>

@@ -1,7 +1,7 @@
 import commerce from "../lib/commerce";
 import CategoryList from "../components/CategoryList";
 import ProductsInCategories from "../components/ProductsIncategories";
-import Footer from "../components/Footer";
+import Layout from "../layout/index";
 
 export async function getStaticProps() {
 
@@ -23,7 +23,7 @@ export default function CategoriesPage({ categories, products, onAddToCart }) {
     <>
       <CategoryList categories={categories} />
       <ProductsInCategories products={products} onAddToCart={onAddToCart} />
-      <Footer />
+      <Layout />
     </>
   );
 }

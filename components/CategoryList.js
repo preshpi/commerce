@@ -25,7 +25,7 @@ export default function CategoryList({ categories }) {
         </span>
       </div>
 
-      <div className="mt-[40px] w-[95%] mx-auto">
+      <div className="mt-[40px]  w-[95%] mx-auto">
         <ul className="md:flex md:flex-wrap lg:flex lg:flex-wrap grid grid-cols-2 lg:gap-[30px] gap-[10px] items-center justify-center">
           {categories.map((category) => (
             <li key={category.slug}>

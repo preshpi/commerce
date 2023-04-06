@@ -1,6 +1,6 @@
 import commerce from "../lib/commerce";
 import ProductList from "../components/ProductList";
-import Footer from "../components/Footer";
+import Layout from "../layout/index";
 import Head from "next/head";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -174,7 +174,7 @@ export default function ProductsPage({ products }) {
           <ProductList products={filteredProducts} />
         )}
       </div>
-      <Footer />
+      <Layout />
     </>
   );
 }

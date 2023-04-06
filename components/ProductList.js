@@ -29,7 +29,7 @@ export default function ProductList({ products }) {
   }
 
   return (
-    <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%]">
+    <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%] mb-[40px]">
       <ul className="gap-[30px] grid lg:grid-cols-4 md:grid-cols-2">
         {displayedProducts.map((product) => (
           <li key={product.permalink}>

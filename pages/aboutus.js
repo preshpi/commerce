@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CiDiscount1, CiDeliveryTruck } from "react-icons/ci";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { SlDiamond } from "react-icons/sl";
-import Footer from "../components/Footer";
+import Layout from "../layout/index";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 
@@ -205,7 +205,7 @@ const AboutUs = () => {
           </Collapse>
         </div>
       </div>
-      <Footer />
+      <Layout />
     </>
   );
 };

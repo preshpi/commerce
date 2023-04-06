@@ -8,7 +8,6 @@ import Image from "next/image";
 import { ImBin } from "react-icons/im";
 import { Carousel } from "antd";
 import { TbTruckDelivery } from "react-icons/tb";
-import Footer from "../components/Footer";
 import Checkout from "../components/Checkout";
 
 export default function Cart() {
@@ -85,7 +84,7 @@ export default function Cart() {
   };
 
   return (
-    <>
+    <div>
       <Head>
         <title> FlairStyle | Cart</title>
         <meta name="keywords" content="FlairStyle" />
@@ -94,7 +93,7 @@ export default function Cart() {
         {carouselData.map(({ text, id }) => (
           <div
             key={id}
-            className="bg-gradient-to-r from-[#fed6e3] to-[#a8edea] lg:h-14 h-16"
+            className="bg-gradient-to-r from-[#fed6e3] to-[#a8edea] lg:h-[20%] h-16"
           >
             <p className="flex items-center justify-center font-mono text-center p-3 text-[12px] lg:text-[14px] lg:mt-[0%] mt-[1%]">
               {text}
@@ -102,14 +101,14 @@ export default function Cart() {
           </div>
         ))}
       </Carousel>
-      <div className="bg-gray-50">
+      <div>
         <div className="pt-6 gap-2 text-sm flex items-center w-[95%] mx-auto">
           <HiArrowNarrowLeft />
           <span className="hover:underline text-gray-500">
             <Link href="/">Home </Link>
           </span>
         </div>
-        <div className="lg:flex md:flex grid w-[80%] mx-auto">
+        <div className="lg:flex md:flex grid w-[80%] mx-auto mt-[5%] justify-center">
           <div className="lg:w-[500px] w-[300px]">
             <h4 className="text-3xl text-center mt-[8%]">Your Shopping Cart</h4>
             {cart?.line_items.map((item) => (
@@ -156,12 +155,12 @@ export default function Cart() {
                 </div>
               </div>
             ))}
-            <div className="flex items-center justify-center mt-[15%] w-[50%] mx-auto">
+            <div className="flex items-center justify-center mt-[15%] lg:w-[50%] mx-auto">
               {cart && cart.total_items > 0 ? (
                 <div className="flex items-center justify-center">
                   <button
                     onClick={clearCart}
-                    className="text-x bg-[#222] text-white hover:opacity-75 px-2 py-2 flex items-center gap-2 rounded mt-5"
+                    className="text-x bg-[#222] text-white hover:opacity-75 px-2 py-2 flex items-center gap-2 rounded mt-2 mb-[40px] "
                   >
                     <ImBin />
                     Clear cart
@@ -169,7 +168,7 @@ export default function Cart() {
                 </div>
               ) : (
                 <div className="mt-8 h-full grid place-items-center justify-center text-xl">
-                  <p>Go shopping</p>
+                  <Link href="/" className="underline hover:scale-125 transition-all duration-300">Go shopping </Link>
                   <p>Your cart is empty</p>
                 </div>
               )}
@@ -194,7 +193,7 @@ export default function Cart() {
             <hr className="border-black border-1 lg:mt-[2%] mt-[10%]" />
             <div className="mt-[5%] flex items-center justify-center">
               <button className="lg:px-[50px] px-[30px] py-3 bg-black hover:opacity-75 text-white">
-               <Checkout/>
+                <Checkout />
               </button>
             </div>
 
@@ -232,8 +231,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    </>
+    </div>
   );
 }

@@ -2,7 +2,8 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="lg:h-[80px] md:h-[100px] h-[100px] bg-[#222] text-white mt-[4%] grid lg:grid-cols-3 md:grid-cols-2  place-items-center  md:justify-between  text-x font-[400]">
+    // <div className="lg:mt-[5%] lg:h-[80px] md:h-[100px] h-[100px] bg-[#222] text-white grid lg:grid-cols-3  place-items-center  md:justify-between  text-x font-[400]">
+    <div className="grid lg:flex items-center justify-center text-center gap-5 text-x font-[400] bg-[#222] text-white lg:justify-between p-5">
       <div>
         <Link
           href="/aboutus"
@@ -13,7 +14,7 @@ const Footer = () => {
       </div>
 
       <div>
-        <p className="lg:animate-pulse text-center w-[300px]">
+        <p className="lg:animate-pulse  w-[300px]">
           © 2023 FlairStyle.
         </p>
       </div>

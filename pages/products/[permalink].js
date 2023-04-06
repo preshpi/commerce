@@ -3,13 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineSafety } from "react-icons/ai";
-import FavouriteButton from "../../components/FavouriteButton";
-import Footer from "../../components/Footer";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ShareIcons from "../../components/ShareIcons";
 import ModalButton from "../../components/Modal";
 import commerce from "../../lib/commerce";
 import sanitizeHtml from "sanitize-html";
+import Layout from "../../layout/index";
 
 
 export async function getStaticProps({ params }) {
@@ -45,6 +44,8 @@ export default function ProductPage({ product }) {
     allowedAttributes: {}, // remove all attributes
   });
 
+
+
   return (
     <>
       <Head>
@@ -78,14 +79,12 @@ export default function ProductPage({ product }) {
               width={300}
               height={300}
               loading="lazy"
-              className="lg:w-[500px] lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
+              className="lg:w-[500px]  hover:cursor-zoom-in scale-75 hover:w-[600px] hover:h-[600px] transition-all duration-300 ease-out  lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
             />
           </div>
           <div className="pt-5 w-[95%] lg:w-[50%] mx-auto p-3">
             <p className="font-[600]">{product.name}</p>
             <p className="mt-4">{product.price.formatted_with_symbol}</p>
-
-
 
             <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
             {/* colors and add to cart */}
@@ -179,7 +178,7 @@ export default function ProductPage({ product }) {
       <h5 className="font-[600] lg:text-2xl text-xl p-5 mt-6 text-center">
         YOU MAY ALSO LIKE
       </h5>
-      <div className="lg:grid-cols-4 grid gap-[20px] w-[80%] mx-auto">
+      <div className="lg:grid-cols-4 grid gap-[20px] w-[80%] mx-auto mb-[40px]">
         {product.related_products.map(
           ({ id, image, name, price, permalink }) => (
             <div key={id}>
@@ -198,7 +197,7 @@ export default function ProductPage({ product }) {
           )
         )}
       </div>
-      <Footer />
+      <Layout />
     </>
   );
 }

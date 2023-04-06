@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Countdown from "../../components/Countdown";
-import Footer from "../../components/Footer";
+import Layout from "../../layout/index";
 import { useState } from "react";
 
 export async function getStaticProps({ params }) {
@@ -166,7 +166,7 @@ export default function CategoryPage({ products, category }) {
         </form>
       </div>
 
-      <div>
+      <div className="mb-[40px]">
         {filteredProducts.length === 0 ? (
           <p className="text-black lg:h-[70vh] h-[50vh] flex items-center justify-center lg:text-5xl text-3xl uppercase font-semibold animate-pulse">
             Item <span className="text-[red] italic"> not </span> available
@@ -175,7 +175,7 @@ export default function CategoryPage({ products, category }) {
           <ProductList products={filteredProducts} />
         )}
       </div>
-      <Footer />
+      <Layout />
     </>
   );
 }
