@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const EmailPasswordAuthSignIn = () => {
   const auth = getAuth(app);
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -19,27 +20,34 @@ const EmailPasswordAuthSignIn = () => {
   const router = useRouter();
 
   const createAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password, displayName)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
         console.log(user);
-        alert("success")
+        alert("success");
         router.push("/");
-
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
         console.log(errorCode);
-        alert(errorCode)
+        alert(errorCode);
       });
   };
 
   return (
     <div className="grid place-items-center gap-[20px]">
+      <input
+        type="displayName"
+        id="displayName"
+        value={displayName}
+        placeholder="Name"
+        onChange={(e) => setDisplayName(e.target.value)}
+        className="lg:w-[400px] w-[250px] p-3 outline-none border-black border rounded-md lg:text-xl text-x text-black"
+      />
       <input
         type="email"
         id="email"

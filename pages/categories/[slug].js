@@ -82,7 +82,7 @@ export default function CategoryPage({ products, category }) {
         <meta name="keywords" content="FlairStyle" />
       </Head>
 
-      <div className=" text-white text-center bg-[#ee3a3a] p-5">
+      <div className=" text-white text-center bg-[#d33d3d] p-5">
         <div className="justify-between flex items-center w-[80%] mx-auto">
           <div className="w-[200px] h-20 lg:block hidden">
             <iframe
@@ -96,9 +96,6 @@ export default function CategoryPage({ products, category }) {
           <div className="grid place-items-center justify-center">
             <h1 className="font-bold">Deal of the Day: 30% Off</h1>
             <Countdown />
-            <button className="rounded-md px-2 py-2 text-white bg-black mt-3 hover:opacity-75">
-              Shop Now
-            </button>
           </div>
 
           <div className="w-[100px] h-20 lg:block hidden">

@@ -11,6 +11,8 @@
     "antd": "^5.3.1",
     "firebase": "^9.18.0",
     "next": "latest",
+    "next-compose-plugins": "^2.2.1",
+    "next-images": "^1.8.4",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
@@ -27,6 +29,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "lqip-loader": "^2.2.1",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }

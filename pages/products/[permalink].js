@@ -9,8 +9,7 @@ import ModalButton from "../../components/Modal";
 import commerce from "../../lib/commerce";
 import sanitizeHtml from "sanitize-html";
 import Layout from "../../layout/index";
-
-
+import { useState } from "react";
 export async function getStaticProps({ params }) {
   const { permalink } = params;
 
@@ -39,12 +38,15 @@ export async function getStaticPaths() {
 }
 
 export default function ProductPage({ product }) {
-    const sanitizedDescription = sanitizeHtml(product.description, {
+  const sanitizedDescription = sanitizeHtml(product.description, {
     allowedTags: [], // remove all tags
     allowedAttributes: {}, // remove all attributes
   });
+  const [selectedSize, setSelectedSize] = useState("");
 
-
+  const handleClick = (size) => {
+    setSelectedSize(size);
+  };
 
   return (
     <>
@@ -71,17 +73,18 @@ export default function ProductPage({ product }) {
         </div>
 
         <div className="lg:flex grid items-center justify-center gap-[30px] mt-6">
-          <div className="mx-auto">
+          <figure className="mx-auto lg:w-[500px]  lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] relative">
             <Image
               src={product.image.url}
               alt={product.name}
               title={product.name}
-              width={300}
-              height={300}
-              loading="lazy"
-              className="lg:w-[500px]  hover:cursor-zoom-in scale-75 hover:w-[600px] hover:h-[600px] transition-all duration-300 ease-out  lg:h-[600px] w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover"
+              fill
+              sizes="300"
+              priority={true}
+              className="scale-75 object-cover"
             />
-          </div>
+          </figure>
+
           <div className="pt-5 w-[95%] lg:w-[50%] mx-auto p-3">
             <p className="font-[600]">{product.name}</p>
             <p className="mt-4">{product.price.formatted_with_symbol}</p>
@@ -90,16 +93,44 @@ export default function ProductPage({ product }) {
             {/* colors and add to cart */}
             <p className="font-bold mt-6">Size (US)</p>
             <div className="flex gap-5 mt-2">
-              <button className="uppercase text-black lg:px-3 md:px-3 px-2 py-1 lg:py-2 md:py-2 text-sm border-black hover:bg-black hover:text-white transistion-colors duration-300 border rounded-full">
+              <button
+                className={`uppercase lg:px-3 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-sm border-black duration-300 border rounded-full ${
+                  selectedSize === "xs"
+                    ? "bg-black text-white"
+                    : "bg-white text-black"
+                }`}
+                onClick={() => handleClick("xs")}
+              >
                 xs(2)
               </button>
-              <button className="uppercase text-black lg:px-3 md:px-3 px-2 py-1 lg:py-2 md:py-2 text-sm border-black hover:bg-black hover:text-white transistion-colors duration-300 border rounded-full">
+              <button
+                className={`uppercase lg:px-3 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-sm border-black duration-300 border rounded-full ${
+                  selectedSize === "s"
+                    ? "bg-black text-white"
+                    : "bg-white text-black"
+                }`}
+                onClick={() => handleClick("s")}
+              >
                 s(4)
               </button>
-              <button className="uppercase text-black lg:px-3 md:px-3 px-2 py-1 lg:py-2 md:py-2 text-sm border-black hover:bg-black hover:text-white transistion-colors duration-300 border rounded-full">
+              <button
+                className={`uppercase lg:px-3 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-sm border-black duration-300 border rounded-full ${
+                  selectedSize === "m"
+                    ? "bg-black text-white"
+                    : "bg-white text-black"
+                }`}
+                onClick={() => handleClick("m")}
+              >
                 m(6)
               </button>
-              <button className="uppercase text-black lg:px-3 md:px-3 px-2 py-1 lg:py-2 md:py-2 text-sm border-black hover:bg-black hover:text-white transistion-colors duration-300 border rounded-full">
+              <button
+                className={`uppercase lg:px-3 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-sm border-black duration-300 border rounded-full ${
+                  selectedSize === "l"
+                    ? "bg-black text-white"
+                    : "bg-white text-black"
+                }`}
+                onClick={() => handleClick("l")}
+              >
                 l(8/10)
               </button>
             </div>
@@ -183,13 +214,16 @@ export default function ProductPage({ product }) {
           ({ id, image, name, price, permalink }) => (
             <div key={id}>
               <Link href={`/products/${permalink}`}>
-                <Image
-                  src={image.url}
-                  alt={name}
-                  width={300}
-                  height={300}
-                  className="lg:w-[300px] lg:h-[300px] object-cover hover:opacity-75 transition-opacity duration-300"
-                />
+                <figure className="relative lg:w-[300px] lg:h-[300px]">
+                  <Image
+                    src={image.url}
+                    alt={name}
+                    fill
+                    sizes="300"
+                    priority={true}
+                    className="object-cover hover:opacity-75 transition-opacity duration-300"
+                  />
+                </figure>
               </Link>
               <p className="text-xl">{name}</p>
               <p className="font-[800]">{price.formatted_with_symbol}</p>

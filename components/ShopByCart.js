@@ -18,20 +18,22 @@ const ShopByCart = ({ categories }) => {
               className="justify-center items-center flex"
             >
               <div className="w-[250px] lg:h-[300px] grid text-center items-center justify-around text-black font-bold drop-shadow-sm">
-                <div>
+                <div className="w-full h-full">
                   {category.assets.map((assets) => (
-                    <div
+                    <figure
                       key={assets.id}
-                      className="w-full h-full flex items-center justify-center mt-4"
+                      className="relative flex items-center justify-center mt-4 lg:w-[200px] lg:h-[300px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] "
                     >
                       <Image
                         src={assets.url}
                         alt={category.slug}
-                        width={300}
-                        height={300}
-                        className="object-cover lg:w-[200px] lg:h-[300px] w-[100px] h-[100px] md:w-[150px] md:h-[150px] transition-all duration-300 hover:scale-110"
+                        fill
+                        sizes="300"
+                        priority={true}
+                        blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect x='0' y='0' width='200' height='200' fill='%23CCCCCC'/%3E%3C/svg%3E"
+                        className="transition-all duration-300 hover:scale-110 object-cover"
                       />
-                    </div>
+                    </figure>
                   ))}
                 </div>
                 <div className="mt-3 uppercase">
@@ -43,11 +45,10 @@ const ShopByCart = ({ categories }) => {
         ))}
       </ul>
       <div className="flex items-center justify-center pt-6">
-      <button className="bg-[#222] text-white text-center font-bold py-2 px-4 rounded-full my-4 hover:opacity-75 animate-pulse">
-        <Link href="/categories">Show All </Link>
-      </button>        
+        <button className="bg-[#222] text-white text-center font-bold py-2 px-4 rounded-full my-4 hover:opacity-75 animate-pulse">
+          <Link href="/categories">Show All </Link>
+        </button>
       </div>
-
     </div>
   );
 };

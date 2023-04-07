@@ -30,58 +30,40 @@ export default function Cart() {
     },
   ];
   const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true)
 
-  const fetchCart = () => {
-    commerce.cart
-      .retrieve()
-      .then((cart) => {
-        console.log(cart);
-        setCart(cart);
-      })
-      .catch((error) => {
-        console.log("There was an error fetching the cart", error);
-      });
+  const fetchCart = async () => {
+    setLoading(true)
+    const response = await commerce.cart.retrieve();
+    setCart(response);
+    setLoading(false)
   };
 
   useEffect(() => {
     fetchCart();
   }, []);
 
-  const handleUpdateCartQty = (lineItemId, newQuantity) => {
-    commerce.cart
-      .update(lineItemId, { quantity: newQuantity })
-      .then((response) => {
-        setCart(response.cart);
-      })
-      .catch((error) => {
-        console.log("There was an error updating the cart", error);
-      });
+
+
+  const handleUpdateCartQty = async (lineItemId, newQuantity) => {
+    const response = await commerce.cart.update(lineItemId, {
+      quantity: newQuantity,
+    });
+    setCart(response.cart);
   };
 
-  const handleRemoveFromCart = (lineItemId) => {
-    commerce.cart
-      .remove(lineItemId)
-      .then((response) => {
-        setCart(response.cart);
-      })
-      .catch((error) => {
-        console.log(
-          "There was an error removing the item from the cart",
-          error
-        );
-      });
+  const handleRemoveFromCart = async (lineItemId) => {
+    const response = await commerce.cart.remove(lineItemId);
+    setCart(response.cart);
   };
 
-  const clearCart = () => {
-    commerce.cart
-      .empty()
-      .then(() => {
-        setCart(null);
-      })
-      .catch((error) => {
-        console.log("There was an error clearing the cart", error);
-      });
-  };
+
+  const handleClearCart = async () => {
+    const response = await commerce.cart.empty();
+
+    setCart(response.cart);
+  }
+
 
   return (
     <div>
@@ -111,55 +93,68 @@ export default function Cart() {
         <div className="lg:flex md:flex grid w-[80%] mx-auto mt-[5%] justify-center">
           <div className="lg:w-[500px] w-[300px]">
             <h4 className="text-3xl text-center mt-[8%]">Your Shopping Cart</h4>
-            {cart?.line_items.map((item) => (
-              <div key={item.id} className="mt-[8%] grid grid-cols-2">
-                <div>
-                  <h3 className="font-[600 mb-3">{item.name}</h3>
-                  <Image
-                    src={item.image.url}
-                    alt={item.name}
-                    title={item.name}
-                    width={80}
-                    height={80}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex flex-col place-items-center justify-center">
-                  <p>{item.price.formatted_with_symbol}</p>
-                  <div className="flex justify-center items-center gap-2 mt-4">
-                    <button
-                      className="bg-gray-100 rounded-full px-2"
-                      onClick={() =>
-                        handleUpdateCartQty(item.id, item.quantity - 1)
-                      }
-                      disabled={item.quantity === 1}
-                    >
-                      -
-                    </button>
-                    <p>{item.quantity}</p>
-                    <button
-                      className="bg-gray-100 rounded-full px-2"
-                      onClick={() =>
-                        handleUpdateCartQty(item.id, item.quantity + 1)
-                      }
-                    >
-                      +
-                    </button>
+            {loading ? (
+              <p className="spinner mt-[5%] w-[80%] mx-auto"></p>
+            ) : (
+              <>
+                {cart?.line_items.map((item) => (
+                  <div key={item.id} className="mt-[8%] grid grid-cols-2">
+                    <div>
+                      <h3 className="font-[600 mb-3">{item.name}</h3>
+                      <figure className="w-[90px] h-[90px] relative">
+                        <Image
+                          src={item.image.url}
+                          alt={item.name}
+                          title={item.name}
+                          fill
+                          sizes="300"
+                          priority={true}
+                          className="object-cover"
+                        />
+                      </figure>
+                    </div>
+
+                    <div className="flex flex-col place-items-center justify-center">
+                      <p>{item.price.formatted_with_symbol}</p>
+                      <div className="flex justify-center items-center gap-2 mt-4">
+                        <p>{loading}</p>
+
+                        <button
+                          className="bg-gray-100 rounded-full px-2"
+                          onClick={() =>
+                            handleUpdateCartQty(item.id, item.quantity - 1)
+                          }
+                          disabled={item.quantity === 1}
+                        >
+                          -
+                        </button>
+                        <p>{item.quantity}</p>
+                        <button
+                          className="bg-gray-100 rounded-full px-2"
+                          onClick={() =>
+                            handleUpdateCartQty(item.id, item.quantity + 1)
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        className="mt-5 px-2 py-1 rounded-full"
+                        onClick={() => handleRemoveFromCart(item.id)}
+                      >
+                        <ImBin />
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className="mt-5 px-2 py-1 rounded-full"
-                    onClick={() => handleRemoveFromCart(item.id)}
-                  >
-                    <ImBin />
-                  </button>
-                </div>
-              </div>
-            ))}
+                ))}
+              </>
+            )}
+
             <div className="flex items-center justify-center mt-[15%] lg:w-[50%] mx-auto">
               {cart && cart.total_items > 0 ? (
                 <div className="flex items-center justify-center">
                   <button
-                    onClick={clearCart}
+                    onClick={handleClearCart}
                     className="text-x bg-[#222] text-white hover:opacity-75 px-2 py-2 flex items-center gap-2 rounded mt-2 mb-[40px] "
                   >
                     <ImBin />
@@ -168,7 +163,12 @@ export default function Cart() {
                 </div>
               ) : (
                 <div className="mt-8 h-full grid place-items-center justify-center text-xl">
-                  <Link href="/" className="underline hover:scale-125 transition-all duration-300">Go shopping </Link>
+                  <Link
+                    href="/"
+                    className="underline hover:scale-125 transition-all duration-300"
+                  >
+                    Go shopping{" "}
+                  </Link>
                   <p>Your cart is empty</p>
                 </div>
               )}

@@ -8,7 +8,7 @@ export default function ProductsInCategories({ products, onAddToCart }) {
   if (!products) return null;
 
   return (
-    <div className="lg:w-[80%] md:w-[85%] mx-auto place-items-center grid justify-center lg:mt-[5%] mt-[15%] md:mt-[10%] mb-[40px]">
+    <div className="lg:w-[90%] md:w-[85%] mx-auto place-items-center grid justify-center lg:mt-[5%] mt-[15%] md:mt-[10%] mb-[40px]">
       <ul className="gap-[50px] md:gap-[30px] grid lg:grid-cols-4 md:grid-cols-3">
         {displayedProducts.map((product) => (
           <li key={product.permalink}>
@@ -38,14 +38,16 @@ function ProductCard({ product, onAddToCart }) {
       onMouseLeave={handleMouseLeave}
     >
       <Link href={`/products/${product.permalink}`}>
-        <Image
-          src={`${product.image.url}`}
-          alt="clothes"
-          width={300}
-          height={300}
-          loading="lazy"
-          className="object-cover lg:w-[300px] lg:h-[300px] w-[300px] h-[300px] relative"
-        />
+        <figure className="lg:w-[300px] lg:h-[400px] w-[300px] h-[300px] bg-[#e2d9d9] relative">
+          <Image
+            src={`${product.image.url}`}
+            alt="clothes"
+            fill
+            sizes="300"
+            priority={true}
+            className="object-cover"
+          />
+        </figure>
       </Link>
 
       {isHovered && (

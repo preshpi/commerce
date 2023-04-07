@@ -21,7 +21,6 @@ export async function getStaticProps() {
 }
 
 export default function IndexPage({ categories, products,  handleAddToCart }) {
-console.log(products);
   return (
     <div className="brandColor">
       <Head>

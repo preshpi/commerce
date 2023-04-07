@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Image from "next/image";
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const handleUpdateCartQty = (lineItemId, quantity) => {
@@ -13,15 +12,8 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
 
   return (
     <div>
-      <Image
-        src={item.image.url}
-        alt={item.name}
-        width={300}
-        height={300}
-        loading="lazy"
-      />
+
       <div>
-        <h4>{item.name}</h4>
         <div>
           <button
             type="button"

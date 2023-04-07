@@ -9,7 +9,7 @@ const Countdown = () => {
   useEffect(() => {
     const countdownInterval = setInterval(() => {
       const now = new Date().getTime();
-      const distance = new Date("2023-04-08T00:00:00Z").getTime() - now;
+      const distance = new Date("2023-05-08T00:00:00Z").getTime() - now;
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor(

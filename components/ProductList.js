@@ -7,7 +7,7 @@ import { Skeleton } from "antd";
 
 export default function ProductList({ products }) {
   const [loading, setLoading] = useState(!products);
-  const displayedProducts = products 
+  const displayedProducts = products;
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -73,14 +73,17 @@ function ProductCard({ product }) {
       onMouseLeave={handleMouseLeave}
     >
       <Link href={`/products/${product.permalink}`}>
-        <Image
-          src={`${product.image.url}`}
-          alt="clothes"
-          width={300}
-          height={300}
-          loading="lazy"
-          className="object-cover lg:w-[300px] lg:h-[400px] w-[300px] h-[300px] relative"
-        />
+        <figure className="lg:w-[300px] lg:h-[400px] w-[300px] h-[300px] relative">
+          <Image
+            src={`${product.image.url}`}
+            alt="clothes"
+            fill
+            sizes="300"
+            priority={true}
+            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect x='0' y='0' width='200' height='200' fill='%23CCCCCC'/%3E%3C/svg%3E"
+            className="object-cover"
+          />
+        </figure>
       </Link>
 
       {isHovered && (

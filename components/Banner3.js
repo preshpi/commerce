@@ -25,30 +25,27 @@ const data = [
 ];
 
 const ShopByBrand = () => {
+
   return (
-    <div className="mt-5 items-center justify-center flex">
-      <div className="items-center justify-center lg:flex grid grid-cols-2">
-        {data.map(({ button, id, img }) => (
-          <div
-            key={id}
-            className="gap-8 md:gap-5 mx-auto items-center justify-center grid place-items-center relative p-5"
-          >
+    <div className="lg:flex grid md:grid-cols-2 w-[90%] mx-auto justify-center items-center gap-8 mt-[5%] mb-[5%]">
+      {data.map(({ button, id, img }) => (
+        <div key={id} className="grid justify-center place-items-center">
+          <figure className="relative h-[300px] w-[300px] lg:w-[300px] lg:h-[500px]">
             <Image
               src={img}
               alt="gallery-image"
-              width={300}
-              height={300}
-              loading="lazy"
+              fill
+              sizes="300"
               className="object-cover"
+              priority={true}
+              blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect x='0' y='0' width='200' height='200' fill='%23CCCCCC'/%3E%3C/svg%3E"
             />
-              <button className="border-b-4 border-[#222] px-3 py-3 text-center mt-5 font-bold text-xl text-black hover:bg-black hover:italic hover:text-white transistion-all duration-300">
-                <Link href="/products">
-                    {button}
-                </Link>
-             </button>
-          </div>
-        ))}
-      </div>
+          </figure>
+          <button className="border-b-4 w-[200px] border-[#222] px-2 py-3 text-center mt-5 font-bold lg:text-xl text-x text-black hover:bg-black hover:italic hover:text-white transistion-all duration-300">
+            <Link href="/products">{button}</Link>
+          </button>{" "}
+        </div>
+      ))}
     </div>
   );
 };

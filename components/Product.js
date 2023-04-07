@@ -1,5 +1,4 @@
 import Link from "next/link";
-import FavouriteButton from "./FavouriteButton";
 
 export default function Product({ name, price, permalink }) {
   return (
@@ -11,11 +10,7 @@ export default function Product({ name, price, permalink }) {
         >
           {name}
         </Link>
-        {/* <span>
-          <FavouriteButton className="cursor-pointer" />
-        </span> */}
       </div>
-
       <p className="mt-[2%]">{price.formatted_with_symbol}</p>
     </>
   );
