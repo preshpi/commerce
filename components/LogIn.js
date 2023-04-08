@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { GoogleButton } from "react-google-button";
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
@@ -18,14 +18,7 @@ const Login = () => {
     }
   };
 
-  const auth = getAuth();
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      // An error happened.
-    });
+
 
   useEffect(() => {
     console.log(user);
