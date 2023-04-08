@@ -1,32 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import Product from "./Product";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import commerce from "../lib/commerce";
-import { Skeleton } from "antd";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ProductList({ products }) {
-  const [loading, setLoading] = useState(!products);
   const displayedProducts = products;
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 10000); // Wait for 10 seconds before updating the loading state
-  }, []);
 
-  if (loading) {
-    return (
-      <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%]">
-        <ul className="gap-[30px] grid lg:grid-cols-4 md:grid-cols-2">
-          {displayedProducts.map((_, index) => (
-            <li key={index}>
-              <Skeleton active />
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
 
   return (
     <div className="lg:w-full mx-auto place-items-center grid justify-center mt-[5%] mb-[40px]">
@@ -56,7 +37,7 @@ function ProductCard({ product }) {
     commerce.cart
       .add(product.id, 1)
       .then((item) => {
-        console.log(`Added ${product.name} to cart:`, item);
+        toast.success(`Added ${product.name} to cart!`);
       })
       .catch((error) => {
         console.log(
@@ -80,7 +61,6 @@ function ProductCard({ product }) {
             fill
             sizes="300"
             priority={true}
-            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect x='0' y='0' width='200' height='200' fill='%23CCCCCC'/%3E%3C/svg%3E"
             className="object-cover"
           />
         </figure>
@@ -94,6 +74,7 @@ function ProductCard({ product }) {
           >
             Add to cart
           </button>
+          <Toaster />
         </div>
       )}
 

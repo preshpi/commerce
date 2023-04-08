@@ -135,29 +135,8 @@ export default function ProductPage({ product }) {
               </button>
             </div>
 
-            <div className="lg:flex md:flex grid gap-[30px]">
+            <div className="grid gap-[30px]">
               <div className="mt-6">
-                {/* colors */}
-                <p className="font-bold">Colors</p>
-                <div className="flex gap-5 mt-2">
-                  <button
-                    className="w-8 h-8 bg-[pink] hover:scale-75 transistion-all duration-300 rounded-full"
-                    title="pink"
-                  ></button>
-                  <button
-                    className="w-8 h-8 bg-[black] hover:scale-75 transistion-all duration-300 rounded-full"
-                    title="black"
-                  ></button>
-                  <button
-                    className="w-8 h-8 bg-[grey] hover:scale-75 transistion-all duration-300 rounded-full"
-                    title="grey"
-                  ></button>
-                  <button
-                    className="w-8 h-8 bg-[blue] hover:scale-75 transistion-all duration-300 rounded-full"
-                    title="blue"
-                  ></button>
-                </div>
-
                 {/* cart */}
                 <div className="mt-6 items-center justify-center">
                   <ModalButton product={product} />
@@ -209,21 +188,23 @@ export default function ProductPage({ product }) {
       <h5 className="font-[600] lg:text-2xl text-xl p-5 mt-6 text-center">
         YOU MAY ALSO LIKE
       </h5>
-      <div className="lg:grid-cols-4 grid gap-[20px] w-[80%] mx-auto mb-[40px]">
+      <div className="w-[80%] mx-auto mb-[40px] lg:grid-cols-4 grid place-items-center justify-cencter gap-[30px]">
         {product.related_products.map(
           ({ id, image, name, price, permalink }) => (
             <div key={id}>
-              <Link href={`/products/${permalink}`}>
-                <figure className="relative lg:w-[300px] lg:h-[300px]">
-                  <Image
-                    src={image.url}
-                    alt={name}
-                    fill
-                    sizes="300"
-                    priority={true}
-                    className="object-cover hover:opacity-75 transition-opacity duration-300"
-                  />
-                </figure>
+              <Link
+                href={`/products/${permalink}`}
+              >
+                  <figure className="relative w-[270px] h-[300px] bg-[#a8a8dc] flex items-center justify-center">
+                    <Image
+                      src={image.url}
+                      alt={name}
+                      fill
+                      sizes="300"
+                      priority={true}
+                      className="object-cover hover:opacity-75 transition-opacity duration-300"
+                    />
+                  </figure>
               </Link>
               <p className="text-xl">{name}</p>
               <p className="font-[800]">{price.formatted_with_symbol}</p>

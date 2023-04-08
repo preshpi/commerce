@@ -6,7 +6,12 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Checkout = () => {
   const [open, setOpen] = useState(false);
-  const monthFormat = "YYYY/MM";
+  const monthFormat = 'YYYY/MM';
+
+  const handleMonthChange = (date) => {
+    const formattedMonth = date.format(monthFormat);
+    setMonth(formattedMonth);
+  };
 
   const { Option } = Select;
 
@@ -28,7 +33,7 @@ const Checkout = () => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [cvv, setCvv] = useState("");
-  const [month, setMonth] = useState("");
+  const [month, setMonth] = useState(dayjs().format(monthFormat));
   const [address, setAddress] = useState("");
 
   return (
@@ -85,12 +90,12 @@ const Checkout = () => {
               onChange={(e) => setCvv(e.target.value)}
             />
             <DatePicker
-              defaultValue={dayjs("", monthFormat)}
+              defaultValue={dayjs()} // Use a moment object initialized with the current date
               format={monthFormat}
               picker="month"
+              value={dayjs(month, monthFormat)}
+              onChange={handleMonthChange}
               required
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
               className="lg:w-[99px] md:w-[90px] w-[150px] outline-none m-auto mt-[5%] md:mt-0 lg:mt-0"
             />
           </div>
